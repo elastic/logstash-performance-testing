@@ -8,8 +8,8 @@ executes a single test.
 
 a test can be execute for a specific number of events of for a specific duration.
 
-- logstash config are in `test/integration/config`
-- sample input files are in `test/integration/input`
+- logstash config are in `config/`
+- sample input files are in `input/`
 
 #### by number of events
 
@@ -30,7 +30,7 @@ the sample input events file will be sent to logstash stdin repetedly until the 
 
 ### suite.rb
 
-- suites are in `test/integration/suite`
+- suites are in `suite/`
 
 ```
 ruby /path/to/logstash-integration-testing/suite.rb [suite file]
