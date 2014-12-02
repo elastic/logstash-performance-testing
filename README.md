@@ -2,6 +2,8 @@
 
 ## performance tests
 
+You must launch the following commands from within your Logstash home directory.
+
 ### run.rb
 
 executes a single test.
