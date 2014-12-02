@@ -1,4 +1,4 @@
-# integration tests
+# integration tests WIP
 
 ## performance tests
 
@@ -14,7 +14,7 @@ a test can be execute for a specific number of events of for a specific duration
 #### by number of events
 
 ```
-ruby test/integration/run.rb --events [number of events] --config [logstash config file] --input [sample input events file]
+ruby /path/to/logstash-integration-testing/run.rb --events [number of events] --config [logstash config file] --input [sample input events file]
 ```
 
 the sample input events file will be sent to logstash stdin repetedly until the required number of events is reached
@@ -22,7 +22,7 @@ the sample input events file will be sent to logstash stdin repetedly until the 
 #### by target duration
 
 ```
-ruby test/integration/run.rb --time [number of seconds] --config [logstash config file] --input [sample input events file]
+ruby /path/to/logstash-integration-testing/run.rb --time [number of seconds] --config [logstash config file] --input [sample input events file]
 ```
 
 the sample input events file will be sent to logstash stdin repetedly until the test elaspsed time reached the target time
@@ -33,7 +33,7 @@ the sample input events file will be sent to logstash stdin repetedly until the 
 - suites are in `test/integration/suite`
 
 ```
-ruby test/integration/suite.rb [suite file]
+ruby /path/to/logstash-integration-testing/suite.rb [suite file]
 ```
 
 a suite file defines a series of tests to run.
