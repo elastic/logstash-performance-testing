@@ -2,7 +2,9 @@
 
 puts "installing dependencies..."
 
-base_dir = (ARGV.size < 1 ?  Dir.pwd : ARGV[0])
+logstash_home = ENV['LOGSTASH_HOME'] || Dir.pwd
+base_dir = (ARGV.size < 1 ?  logstash_home : ARGV[0])
+
 logstash = File.join(base_dir, "bin", "logstash")
 version = `#{logstash} --version`
 

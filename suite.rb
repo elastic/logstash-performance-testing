@@ -14,10 +14,12 @@ end
 
 @debug = !!ENV["DEBUG"]
 
-install_path = ARGV.size > 1 ? ARGV[1] : 'logstash'
-tests        = eval(IO.read(ARGV[0]))
-lines        = ["name, #{Runner.headers.join(',')}"]
-first        = true
+logstash_home = ENV['LOGSTASH_HOME'] || 'logstash'
+install_path  = ARGV.size > 1 ? ARGV[1] : logstash_home
+
+tests         = eval(IO.read(ARGV[0]))
+lines         = ["name, #{Runner.headers.join(',')}"]
+first         = true
 
 reporter = Thread.new do
   loop do
