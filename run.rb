@@ -12,14 +12,14 @@ LAST_MESSAGE = ">>> lorem ipsum stop".freeze
 Thread.abort_on_exception = true
 
 class Runner
-  LOGSTASH_BIN  = File.join(Dir.pwd, "bin", "logstash").freeze
+  LOGSTASH_BIN  = File.join("bin", "logstash").freeze
   REFRESH_COUNT = 100
 
   attr_reader :command
 
-  def initialize(config, debug=false)
+  def initialize(config, debug=false, install_path=Dir.pwd)
     @debug = debug
-    @command = [LOGSTASH_BIN, "-f", config]
+    @command = [File.join(install_path, LOGSTASH_BIN), "-f", config]
   end
 
   def run(required_events_count, required_run_time, input_lines)

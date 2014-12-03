@@ -2,9 +2,8 @@
 
 puts "installing dependencies..."
 
-base_dir = Dir.pwd
+base_dir = (ARGV.size < 1 ?  Dir.pwd : ARGV[0])
 logstash = File.join(base_dir, "bin", "logstash")
-rake = File.join(base_dir, "rake")
 version = `#{logstash} --version`
 
 if version[/\d\.\d\.\d/] =~ /1\.4\./
