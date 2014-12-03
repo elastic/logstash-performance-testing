@@ -11,7 +11,7 @@ function run() {
 
   echo "Dependency installation in $1 $ORIGIN"
   cd $ORIGIN
-  #ruby install_deps.rb $1
+  ruby install_deps.rb $1
 
   echo "Basic performance report"
   ruby suite.rb suite/basic_performance_quick.rb $1 > "$3"
