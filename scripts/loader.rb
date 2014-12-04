@@ -2,6 +2,7 @@
 
 require 'elasticsearch'
 require 'csv'
+require 'active_support/core_ext'
 
 class Loader
 
@@ -30,31 +31,39 @@ class Loader
 
   def load_file!(client, file)
     puts file if @debug
+    props = scrap_props(file)
     CSV.foreach(file, :headers => true) do |row|
       puts "#{row.class}, #{row.count}, #{row.headers}" if @debug
-      match = /-(\d*.\d*)_\d*.csv/.match(file)
-      clazzname = match[1]
-
       row.headers.each do |header|
         next if row.headers.first == header
-
-        data = {
-          "class" => clazzname,
-          "type" => row[0].gsub(/\s|\//,'_'),
-          "timestamp" => timestamp(file),
-          "kpi" => header,
-          "times" => row[header].to_i,
-          "_source" => "script"
-        }
-        client.index(index: 'logstash-benchmark', type: 'bench', body: data) rescue puts "failure with #{row}"
+        content = build_body(row, header, props)
+        id   = "#{props[:time]}#{content["type"]}#{content["kpi"]}".hash
+        client.index(index: 'logstash-benchmark', type: 'bench', id: id, body: content) rescue puts "failure with #{row}"
       end
     end
     puts if @debug
   end
 
-  def timestamp(file)
-    match = /(\d*).csv/.match(file)
-    Time.at(match[1].to_i).utc.to_s.split(' ').first
+  def build_body(row, header, props)
+    type = row[0].gsub(/\s|\//,'_')
+    kpi  = header.gsub(/\s|\//,'_')
+    {
+      "class" => props[:class],
+      "type" => type,
+      "ts" => timestamp(props[:time]),
+      "kpi" => kpi,
+      "times" => row[header].to_i,
+      "_source" => "script"
+    }
+  end
+
+  def timestamp(time)
+    Time.at(time.to_i).strftime("%Y-%m-%dT%H:%M:%S.%3N%z")
+  end
+
+  def scrap_props(file)
+    match = /-(\d*.\d*)_(\d*).csv/.match(file)
+    {:class => match[1], :time => match[2] }
   end
 
   def build_index(client, params)
@@ -62,10 +71,10 @@ class Loader
   end
 
   def index_config
-    props   = { "name"   => { "type" => "string" },
-                "class"  => { "type" => "string" },
-                "kpi"    => { "type" => "string" },
-                "timestamp"   => { "type" => "date", "index" => "analyzed" },
+    props   = { "name"  => { "type" => "string" },
+                "class" => { "type" => "string" },
+                "kpi"   => { "type" => "string" },
+                "ts"  => { "type" => "date", "format" => "yyyy-MM-dd'T'HH:mm:ss.SSSZ", "index" => "analyzed" },
                 "times" => { "type" => "integer" } }
     { 'mappings' => { 'bench' => { '_source' => { 'enabled' => true }, 'properties' => props } } }
   end
