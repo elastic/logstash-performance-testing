@@ -13,7 +13,7 @@ class Loader
   def run
     Dir.entries(@dir).each do |file|
       next if File.directory?(file)
-      do!(client, File.join(@dir, file))
+      load_file!(client, File.join(@dir, file))
     end
   end
 
@@ -27,7 +27,7 @@ class Loader
     @client ||= Elasticsearch::Client.new log: true
   end
 
-  def do!(client, file)
+  def load_file!(client, file)
     puts file if @debug
     CSV.foreach(file, :headers => true) do |row|
       puts "#{row.class}, #{row.count}, #{row.headers}" if @debug
