@@ -29,14 +29,14 @@ class Loader
   end
 
   def load_file!(client, file)
-    puts file if @debug
     props = scrap_props(file)
+    puts "file: #{file} props: #{props}" if @debug
     CSV.foreach(file, :headers => true) do |row|
       puts "#{row.class}, #{row.count}, #{row.headers}" if @debug
       row.headers.each do |header|
         next if row.headers.first == header
         content = build_body(row, header, props)
-        id   = "#{props[:time]}#{content["type"]}#{content["kpi"]}".hash
+        id   = "#{props[:time]}#{props[:class]}#{content["type"]}#{content["kpi"]}".hash
         client.index(index: 'logstash-benchmark', type: 'bench', id: id, body: content) rescue puts "failure with #{row}"
       end
     end
