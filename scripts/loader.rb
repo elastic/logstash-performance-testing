@@ -12,8 +12,9 @@ class Loader
 
   def run
     Dir.entries(@dir).each do |file|
-      next if File.directory?(file)
-      load_file!(client, File.join(@dir, file))
+      absolute_path = File.join(@dir, file)
+      next if File.directory?(absolute_path)
+      load_file!(client, absolute_path)
     end
   end
 
@@ -24,14 +25,14 @@ class Loader
   private
 
   def client
-    @client ||= Elasticsearch::Client.new log: true
+    @client ||= Elasticsearch::Client.new log: @debug
   end
 
   def load_file!(client, file)
     puts file if @debug
     CSV.foreach(file, :headers => true) do |row|
       puts "#{row.class}, #{row.count}, #{row.headers}" if @debug
-      match = /-(\w*)_(\d*).csv/.match(file)
+      match = /-(\d*.\d*)_\d*.csv/.match(file)
       clazzname = match[1]
 
       row.headers.each do |header|
