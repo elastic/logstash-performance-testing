@@ -17,9 +17,9 @@ class Runner
 
   attr_reader :command
 
-  def initialize(config, debug=false, install_path=Dir.pwd)
+  def initialize(config, debug=false, logstash_home=Dir.pwd)
     @debug = debug
-    @command = [File.join(install_path, LOGSTASH_BIN), "-f", config]
+    @command = [File.join(logstash_home, LOGSTASH_BIN), "-f", config]
   end
 
   def run(required_events_count, required_run_time, input_lines)
