@@ -45,8 +45,8 @@ class Loader
   end
 
   def build_body(row, header, props)
-    type = row[0].gsub(/\s|\//,'_')
-    kpi  = header.gsub(/\s|\//,'_')
+    type = row[0]
+    kpi  = header
     {
       "class" => props[:class],
       "type" => type,
@@ -71,12 +71,26 @@ class Loader
   end
 
   def index_config
+    {:settings => index_settings, :mappings => index_mappings }
+  end
+
+  def index_settings
+    { analysis: {analyzer: {
+      label: {
+        stopwords: '_none_',
+        type: 'standard'
+      }
+    }}}
+  end
+
+  def index_mappings
     props   = { "name"  => { "type" => "string" },
                 "class" => { "type" => "string" },
-                "kpi"   => { "type" => "string" },
+                "type"  => { "type" => "string", "index" => "not_analyzed" },
+                "kpi"   => { "type" => "string", "index" => "not_analyzed" },
                 "ts"  => { "type" => "date", "format" => "yyyy-MM-dd'T'HH:mm:ss.SSSZ", "index" => "analyzed" },
                 "times" => { "type" => "integer" } }
-    { 'mappings' => { 'bench' => { '_source' => { 'enabled' => true }, 'properties' => props } } }
+    { 'bench' => { '_source' => { 'enabled' => true }, 'properties' => props } }
   end
 
 end
