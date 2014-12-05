@@ -10,7 +10,7 @@ describe Runner do
 
   subject (:runner) { Runner.new(config) }
 
-  let(:command) { [Runner::LOGSTASH_BIN, "-f", "spec/fixtures/simple.conf"]}
+  let(:command) { [File.join(Dir.pwd, Runner::LOGSTASH_BIN), "-f", "spec/fixtures/simple.conf"]}
 
   it "invokes the logstash command" do
     Open3.should_receive(:popen3).with(*command).and_return(true)
