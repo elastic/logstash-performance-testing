@@ -1,4 +1,4 @@
-# integration tests WIP
+# Integration Testing for Logstash
 
 ## Installation
 
