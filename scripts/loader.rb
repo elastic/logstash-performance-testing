@@ -5,7 +5,7 @@ require 'csv'
 
 class Loader
 
-  def initialize(dir="", debug=false)
+  def initialize(dir = "", debug = false)
     @dir = dir
     @debug = debug
   end

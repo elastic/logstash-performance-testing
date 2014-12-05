@@ -17,7 +17,7 @@ class Runner
 
   attr_reader :command
 
-  def initialize(config, debug=false, logstash_home=Dir.pwd)
+  def initialize(config, debug = false, logstash_home = Dir.pwd)
     @debug = debug
     @command = [File.join(logstash_home, LOGSTASH_BIN), "-f", config]
   end
