@@ -47,7 +47,7 @@ class Runner
   end
 
   def self.headers
-    ["elaspsed", "events", "avg tps", "best tps", "avg top 20% tps"]
+    ["elapsed", "events", "avg tps", "best tps", "avg top 20% tps"]
   end
 
   def feed_input_with(required_events_count, required_run_time, input_lines, i)

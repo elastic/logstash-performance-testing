@@ -19,8 +19,8 @@ module LSit
           events = test[:events].to_i
           time   = test[:time].to_i
           runner = Runner.new(test[:config], debug, install_path)
-          p, elaspsed, events_count = runner.run(events, time, runner.read_input_file(test[:input]))
-          lines << "#{test[:name]}, #{"%.2f" % elaspsed}, #{events_count}, #{"%.0f" % (events_count / elaspsed)},#{p.last}, #{"%.0f" % (p.reduce(:+) / p.size)}"
+          p, elapsed, events_count = runner.run(events, time, runner.read_input_file(test[:input]))
+          lines << "#{test[:name]}, #{"%.2f" % elapsed}, #{events_count}, #{"%.0f" % (events_count / elaspsed)},#{p.last}, #{"%.0f" % (p.reduce(:+) / p.size)}"
         end
         lines
       ensure
