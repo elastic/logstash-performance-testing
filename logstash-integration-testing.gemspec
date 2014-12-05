@@ -4,7 +4,7 @@ require File.expand_path('../lib/lsit/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Pere Urbon-Bayes"]
   gem.email         = ["pere.urbon@elasticsearch.com"]
-  gem.description   = %q{Logstash integration testing support maked easy}
+  gem.description   = %q{Logstash integration testing support made easy}
   gem.summary       = %q{lsit - Integration testing for Logstash}
   gem.homepage      = "http://logstash.net/"
   gem.license       = "Apache License (2.0)"
