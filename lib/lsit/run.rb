@@ -4,13 +4,13 @@ require "open3"
 
 require 'lsit/stats'
 
-INITIAL_MESSAGE = ">>> lorem ipsum start".freeze
-LAST_MESSAGE = ">>> lorem ipsum stop".freeze
-
 Thread.abort_on_exception = true
 
 class Runner
   LOGSTASH_BIN  = File.join("bin", "logstash").freeze
+
+  INITIAL_MESSAGE = ">>> lorem ipsum start".freeze
+  LAST_MESSAGE = ">>> lorem ipsum stop".freeze
   REFRESH_COUNT = 100
 
   attr_reader :command
@@ -62,11 +62,8 @@ class Runner
     IO.readlines(file_path).map(&:chomp)
   end
 
-  private
-
   def feed_input_events(io, events_count, lines, last_message)
     loop_count = (events_count / lines.size).ceil # how many time we send the input file over
-
     (1..loop_count).each{lines.each {|line| io.puts(line)}}
 
     io.puts(last_message)
@@ -74,6 +71,8 @@ class Runner
 
     loop_count * lines.size
   end
+
+  private
 
   def feed_input_interval(io, seconds, lines, last_message)
     loop_count = (2000 / lines.size).ceil # check time every ~2000(ceil) input lines
