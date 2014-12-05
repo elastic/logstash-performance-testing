@@ -1,10 +1,8 @@
-# encoding: utf-8
-
 require "benchmark"
 require "thread"
 require "open3"
 
-require_relative 'stats'
+require 'lsit/stats'
 
 INITIAL_MESSAGE = ">>> lorem ipsum start".freeze
 LAST_MESSAGE = ">>> lorem ipsum stop".freeze
@@ -133,32 +131,5 @@ def extract_options(args)
   end
 
   options
-
-end
-
-#
-## script main
-if __FILE__ == $0
-  # standalone quick & dirty options parsing
-  args = ARGV.dup
-  if args.size != 6
-    $stderr.puts("usage: ruby run.rb --events [events count] --config [config file] --input [input file]")
-    $stderr.puts("       ruby run.rb --time [seconds] --config [config file] --input [input file]")
-    exit(1)
-  end
-
-  @debug = !!ENV["DEBUG"]
-
-  options      = extract_options args
-  events_count = options[:events].to_i # total number of events to feed, independant of input file size
-  run_time     = options[:time].to_i
-
-  puts("using config file=#{options[:config]}, input file=#{options[:input]}") if @debug
-
-  runner = Runner.new(options[:config], @debug)
-  p, elaspsed, real_events_count = runner.run(events_count, run_time, runner.read_input_file(options[:input]))
-
-  puts runner.headers if options[:headers]
-  puts("#{"%.2f" % elaspsed}, #{real_events_count}, #{"%.0f" % (real_events_count / elaspsed)},#{p.last}, #{"%.0f" % (p.reduce(:+) / p.size)}")
 
 end

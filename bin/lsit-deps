@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # encoding: utf-8
 
 puts "installing dependencies..."
@@ -21,7 +23,8 @@ else
 
   [inputs, outputs, filters].each do |plugins|
     plugins.map{|s| "logstash-#{s}"}.each do |plugin|
-      puts(`#{logstash} plugin install #{plugin}`)
+      command = "#{logstash} plugin install #{plugin}"
+      puts "#{command} #{%x[#{command}]}"
     end
   end
 end
