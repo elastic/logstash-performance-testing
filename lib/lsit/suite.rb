@@ -1,6 +1,9 @@
 require 'lsit/reporter'
 
 module LSit
+
+  class ConfigException < Exception; end
+
   module Executor
     class Suite
 
@@ -21,11 +24,12 @@ module LSit
           events  = test[:events].to_i
           time    = test[:time].to_i
           manager = runner.new(test_config(test[:config]), debug, install_path)
-          p, elapsed, events_count = manager.run(events, time, manager.read_input_file(test_input(test[:input])))
+          p, elapsed, events_count = manager.run(events, time, runner.read_input_file(test_input(test[:input])))
           lines << "#{test[:name]}, #{"%.2f" % elapsed}, #{events_count}, #{"%.0f" % (events_count / elapsed)},#{p.last}, #{"%.0f" % (p.reduce(:+) / p.size)}"
         end
         lines
-      rescue
+      rescue Errno::ENOENT => e
+        raise ConfigException.new(e)
       ensure
         reporter.stop if reporter
       end
@@ -49,7 +53,7 @@ module LSit
       end
 
       def default_config
-        {'path' => '.', 'config' => 'config', 'input' => 'input'}
+        {'path' => '.', 'config' => '', 'input' => ''}
       end
 
     end

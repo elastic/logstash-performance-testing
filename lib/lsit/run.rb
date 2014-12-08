@@ -58,7 +58,7 @@ class Runner
     end
   end
 
-  def read_input_file(file_path)
+  def self.read_input_file(file_path)
     IO.readlines(file_path).map(&:chomp)
   end
 
