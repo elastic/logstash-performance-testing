@@ -19,5 +19,6 @@ logstash_home = ENV['LOGSTASH_HOME'] || 'logstash'
 install_path  = ARGV.size > 1 ? ARGV[1] : logstash_home
 
 runner = LSit::Executor::Suite.new(ARGV[0], install_path)
+runner.config = '.lsit' if File.exist?('.lsit')
 lines  = runner.execute(debug)
 puts lines.join("\n")
