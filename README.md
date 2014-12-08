@@ -1,41 +1,45 @@
-# integration tests WIP
+# Integration Testing for Logstash
 
-## performance tests
+## Installation
 
-You must launch the following commands from within your Logstash home directory.
+You can use this code as gem within your logstash project, to procced with the installation you can either download the code and build the gem using the next command:
 
-### run.rb
+```gem install [path to the gemspec file]```
 
-executes a single test.
+or add it to your Gemfile like this:
 
-a test can be execute for a specific number of events of for a specific duration.
+    gem 'lsit', :git => 'https://github.com/elasticssarch/logstash-integration-testing.git'
 
-- logstash config are in `config/`
-- sample input files are in `input/`
+and then do budler update.
 
-#### by number of events
+## Setup
+
+To run the test you need to next data (you can see an example of them at the `examples/` directory):
+
+- The logstash configs, found in `..config/`
+- The sample input files, found in `..input/`
+- The suites definitions, found in `..suite/`
+
+### Bootstrap
+
+Before you can run your test is necessary to bootstrap your logstash installation and install the test dependencies, to do that you must:
+
+If you are in 1.5:
+- Run `rake bootstrap` to setup the system.
+- Run `lsit-deps` to install the test dependencies
+For 1.4:
+- Run `bin/logstash deps` to setup everything.
+
+## Performance tests
+
+Test can be run in groups of suites.
+
+### How to run test suites
+
+- suites examples can be found in `examples/suite/`
 
 ```
-ruby /path/to/logstash-integration-testing/run.rb --events [number of events] --config [logstash config file] --input [sample input events file]
-```
-
-the sample input events file will be sent to logstash stdin repetedly until the required number of events is reached
-
-#### by target duration
-
-```
-ruby /path/to/logstash-integration-testing/run.rb --time [number of seconds] --config [logstash config file] --input [sample input events file]
-```
-
-the sample input events file will be sent to logstash stdin repetedly until the test elaspsed time reached the target time
-
-
-### suite.rb
-
-- suites are in `suite/`
-
-```
-ruby /path/to/logstash-integration-testing/suite.rb [suite file]
+lsit-suite [suite definition]
 ```
 
 a suite file defines a series of tests to run.

@@ -1,18 +1,16 @@
-# encoding: utf-8
-
 require "benchmark"
 require "thread"
 require "open3"
 
-require_relative 'stats'
-
-INITIAL_MESSAGE = ">>> lorem ipsum start".freeze
-LAST_MESSAGE = ">>> lorem ipsum stop".freeze
+require 'lsit/stats'
 
 Thread.abort_on_exception = true
 
 class Runner
   LOGSTASH_BIN  = File.join("bin", "logstash").freeze
+
+  INITIAL_MESSAGE = ">>> lorem ipsum start".freeze
+  LAST_MESSAGE = ">>> lorem ipsum stop".freeze
   REFRESH_COUNT = 100
 
   attr_reader :command
@@ -49,7 +47,7 @@ class Runner
   end
 
   def self.headers
-    ["elaspsed", "events", "avg tps", "best tps", "avg top 20% tps"]
+    ["elapsed", "events", "avg tps", "best tps", "avg top 20% tps"]
   end
 
   def feed_input_with(required_events_count, required_run_time, input_lines, i)
@@ -64,11 +62,8 @@ class Runner
     IO.readlines(file_path).map(&:chomp)
   end
 
-  private
-
   def feed_input_events(io, events_count, lines, last_message)
     loop_count = (events_count / lines.size).ceil # how many time we send the input file over
-
     (1..loop_count).each{lines.each {|line| io.puts(line)}}
 
     io.puts(last_message)
@@ -76,6 +71,8 @@ class Runner
 
     loop_count * lines.size
   end
+
+  private
 
   def feed_input_interval(io, seconds, lines, last_message)
     loop_count = (2000 / lines.size).ceil # check time every ~2000(ceil) input lines
@@ -133,32 +130,5 @@ def extract_options(args)
   end
 
   options
-
-end
-
-#
-## script main
-if __FILE__ == $0
-  # standalone quick & dirty options parsing
-  args = ARGV.dup
-  if args.size != 6
-    $stderr.puts("usage: ruby run.rb --events [events count] --config [config file] --input [input file]")
-    $stderr.puts("       ruby run.rb --time [seconds] --config [config file] --input [input file]")
-    exit(1)
-  end
-
-  @debug = !!ENV["DEBUG"]
-
-  options      = extract_options args
-  events_count = options[:events].to_i # total number of events to feed, independant of input file size
-  run_time     = options[:time].to_i
-
-  puts("using config file=#{options[:config]}, input file=#{options[:input]}") if @debug
-
-  runner = Runner.new(options[:config], @debug)
-  p, elaspsed, real_events_count = runner.run(events_count, run_time, runner.read_input_file(options[:input]))
-
-  puts runner.headers if options[:headers]
-  puts("#{"%.2f" % elaspsed}, #{real_events_count}, #{"%.0f" % (real_events_count / elaspsed)},#{p.last}, #{"%.0f" % (p.reduce(:+) / p.size)}")
 
 end
