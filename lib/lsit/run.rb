@@ -26,11 +26,13 @@ class Runner
     real_events_count = 0
     Open3.popen3(*@command) do |i, o, e|
       puts("sending initial event") if @debug
-      i.puts(INITIAL_MESSAGE)
-      i.flush
+      start_time = Benchmark.realtime do
+        i.puts(INITIAL_MESSAGE)
+        i.flush
 
-      puts("waiting for initial event") if @debug
-      expect_output(o, /#{INITIAL_MESSAGE}/)
+        puts("waiting for initial event") if @debug
+        expect_output(o, /#{INITIAL_MESSAGE}/)
+      end
 
       puts("starting output reader thread") if @debug
       reader = stats.detach_output_reader(o, /#{LAST_MESSAGE}/)
@@ -42,12 +44,12 @@ class Runner
         reader.join
       end
       p = percentile(stats.stats, 0.80)
-      [p, elaspsed, real_events_count]
+      [p, elaspsed, real_events_count, start_time]
     end
   end
 
   def self.headers
-    ["elapsed", "events", "avg tps", "best tps", "avg top 20% tps"]
+    ["start time", "elapsed", "events", "avg tps", "best tps", "avg top 20% tps"]
   end
 
   def feed_input_with(required_events_count, required_run_time, input_lines, i)
