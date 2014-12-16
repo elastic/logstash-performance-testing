@@ -43,7 +43,7 @@ class Runner
         puts("waiting for output reader to complete") if @debug
         reader.join
       end
-      { :p => percentile(stats.stats, 0.80) , :elapsed => elapsed, :events_count => real_events_count, :start_time => start_time }
+      { :percentile => percentile(stats.stats, 0.80) , :elapsed => elapsed, :events_count => real_events_count, :start_time => start_time }
     end
   end
 
