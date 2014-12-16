@@ -38,13 +38,13 @@ class Runner
       reader = stats.detach_output_reader(o, /#{LAST_MESSAGE}/)
       puts("starting feeding input") if @debug
 
-      elaspsed = Benchmark.realtime do
+      elapsed = Benchmark.realtime do
         real_events_count = feed_input_with(required_events_count, required_run_time, input_lines, i)
         puts("waiting for output reader to complete") if @debug
         reader.join
       end
       p = percentile(stats.stats, 0.80)
-      [p, elaspsed, real_events_count, start_time]
+      [p, elapsed, real_events_count, start_time]
     end
   end
 
