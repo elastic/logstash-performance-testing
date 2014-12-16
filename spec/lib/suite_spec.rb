@@ -8,7 +8,7 @@ describe LSit::Executor::Suite do
   let(:serial_runner) { double('DummySerialRunner') }
   let(:runner)        { Runner }
 
-  let(:run_outcome)   { { :p => [2000] , :elapsed => 100, :events_count => 3000, :start_time => 12 } }
+  let(:run_outcome)   { { :percentile => [2000] , :elapsed => 100, :events_count => 3000, :start_time => 12 } }
   subject(:manager) { LSit::Executor::Suite.new(suite_def, logstash_home, config, runner) }
 
   context "with a valid configuration" do
