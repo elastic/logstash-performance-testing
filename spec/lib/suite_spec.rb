@@ -8,16 +8,13 @@ describe LSit::Executor::Suite do
   let(:serial_runner) { double('DummySerialRunner') }
   let(:runner)        { Runner }
 
+  let(:run_outcome)   { { :p => [2000] , :elapsed => 100, :events_count => 3000, :start_time => 12 } }
   subject(:manager) { LSit::Executor::Suite.new(suite_def, logstash_home, config, runner) }
-
-  before(:each) do
-    expect(runner).to receive(:headers) { [] }
-  end
 
   context "with a valid configuration" do
     before(:each) do
-      expect(serial_runner).to receive(:run).with(0, 5, anything()).ordered  { [[2000], 100, 3000] }
-      expect(serial_runner).to receive(:run).with(0, 10, anything()).ordered { [[2000], 100, 3000] }
+      expect(serial_runner).to receive(:run).with(0, 5, anything()).ordered  { run_outcome }
+      expect(serial_runner).to receive(:run).with(0, 10, anything()).ordered { run_outcome }
     end
     context "using a file" do
 

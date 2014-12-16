@@ -23,9 +23,10 @@ module LSit
         tests.each do |test|
           events  = test[:events].to_i
           time    = test[:time].to_i
+
           manager = runner.new(test_config(test[:config]), debug, install_path)
-          p, elapsed, events_count, start_time = manager.run(events, time, runner.read_input_file(test_input(test[:input])))
-          lines << "#{test[:name]}, #{start_time} #{"%.2f" % elapsed}, #{events_count}, #{"%.0f" % (events_count / elapsed)},#{p.last}, #{"%.0f" % (p.reduce(:+) / p.size)}"
+          metrics = manager.run(events, time, runner.read_input_file(test_input(test[:input])))
+          lines << formatter(test[:name], metrics)
         end
         lines
       rescue Errno::ENOENT => e
@@ -56,6 +57,12 @@ module LSit
         {'path' => '.', 'config' => '', 'input' => ''}
       end
 
+      def formatter(test_name, args={})
+        p      =   args[:p]
+        params = [ test_name, args[:start_time], args[:elapsed], args[:events_count],
+                   args[:events_count] / args[:elapsed], p.last, p.reduce(:+) / p.size ]
+        "%s, %.2f, %2.f, %0.f, %.0f, %2.f, %0.f" % params
+      end
     end
   end
 end
