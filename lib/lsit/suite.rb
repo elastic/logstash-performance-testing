@@ -41,7 +41,7 @@ module LSit
       private
 
       def load_config(config)
-        ::YAML.load(File.read(config))['default'] rescue default_config
+        ::YAML::load_file(config)['default'] rescue default_config
       end
 
       def test_config(file)

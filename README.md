@@ -22,7 +22,7 @@ To run the test you need to next data (you can see an example of them at the `ex
 
 ### Configuration
 
-If you add a file names ```.lsit``` into your main logstash directory
+If you add a file names ```.lsit.yml``` into your main logstash directory
 you can have your configuration and input files in non standard
 location.
 
