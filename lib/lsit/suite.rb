@@ -59,9 +59,15 @@ module LSit
 
       def formatter(test_name, args={})
         percentile =   args[:percentile]
-        params     = [ test_name, args[:start_time], args[:elapsed], args[:events_count],
-                       args[:events_count] / args[:elapsed], percentile.last, percentile.reduce(:+) / percentile.size ]
-        "%s, %.2f, %2.f, %0.f, %.0f, %2.f, %0.f" % params
+        [
+          "%s"   %           test_name,
+          "%.2f" %   args[:start_time],
+          "%.2f" %      args[:elapsed],
+          "%.0f" % args[:events_count],
+          "%.0f" % (args[:events_count] / args[:elapsed]),
+          "%.2f" % percentile.last,
+          "%.0f" % (percentile.reduce(:+) / percentile.size)
+        ].join(',')
       end
     end
   end
