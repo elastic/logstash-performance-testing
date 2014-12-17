@@ -1,0 +1,4 @@
+default:
+  path: 'spec/'
+  config: 'wrong_fixture'
+  input: 'wrong_fixture'

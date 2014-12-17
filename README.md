@@ -20,6 +20,21 @@ To run the test you need to next data (you can see an example of them at the `ex
 - The sample input files, found in `..input/`
 - The suites definitions, found in `..suite/`
 
+### Configuration
+
+If you add a file names ```.lsit.yml``` into your main logstash directory
+you can have your configuration and input files in non standard
+location.
+
+Example:
+
+```
+default:
+  path: './lsit-config'
+  config: ''
+  input: ''
+```
+
 ### Bootstrap
 
 Before you can run your test is necessary to bootstrap your logstash installation and install the test dependencies, to do that you must:
