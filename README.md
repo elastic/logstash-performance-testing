@@ -2,7 +2,7 @@
 
 ## Installation
 
-You can use this code as gem within your logstash project, to procced with the installation you can either download the code and build the gem using the next command:
+You can use this code as gem within your logstash project, to proceed with the installation you can either download the code and build the gem using the next command:
 
 ```gem install [path to the gemspec file]```
 
