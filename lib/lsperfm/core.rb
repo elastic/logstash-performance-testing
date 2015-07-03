@@ -24,8 +24,8 @@ module LogStash::PerfM
         events  = test[:events].to_i
         time    = test[:time].to_i
 
-        manager = runner.new(test_config(test[:config]), debug, install_path)
-        metrics = manager.run(events, time, runner.read_input_file(test_input(test[:input])))
+        manager = runner.new(find_test_config(test[:config]), debug, install_path)
+        metrics = manager.run(events, time, runner.read_input_file(find_test_input(test[:input])))
         lines << formatter(test[:name], metrics)
       end
       lines
@@ -55,12 +55,12 @@ module LogStash::PerfM
       ::YAML::load_file(config)['default'] rescue {}
     end
 
-    def test_config(file)
+    def find_test_config(file)
       return file if config.empty?
       File.join(config['path'], config['config'], file)
     end
 
-    def test_input(file)
+    def find_test_input(file)
       return file if config.empty?
       File.join(config['path'], config['input'], file)
     end
