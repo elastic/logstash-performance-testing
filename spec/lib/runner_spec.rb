@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Runner do
+describe LogStash::PerfM::Runner do
 
   let(:config) { 'spec/fixtures/simple.conf' }
   let(:lines)  { load_fixture('simple_10.txt').split("\n") }
@@ -8,9 +8,9 @@ describe Runner do
   let(:events) { 30 }
   let(:time)   { 10 }
 
-  subject (:runner) { Runner.new(config) }
+  subject (:runner) { LogStash::PerfM::Runner.new(config) }
 
-  let(:command) { [File.join(Dir.pwd, Runner::LOGSTASH_BIN), "-f", "spec/fixtures/simple.conf"]}
+  let(:command) { [File.join(Dir.pwd, LogStash::PerfM::Runner::LOGSTASH_BIN), "-f", "spec/fixtures/simple.conf"]}
 
   it "invokes the logstash command" do
     Open3.should_receive(:popen3).with(*command).and_return(true)
@@ -23,7 +23,7 @@ describe Runner do
     subject(:feed) { runner.feed_input_with(events, 0, lines, io) }
 
     it "feeds in terms of events" do
-      expect(runner).to receive(:feed_input_events).with(io, events, lines, Runner::LAST_MESSAGE)
+      expect(runner).to receive(:feed_input_events).with(io, events, lines, LogStash::PerfM::Runner::LAST_MESSAGE)
       runner.feed_input_with(events, 0, lines, io)
     end
 
