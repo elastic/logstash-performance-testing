@@ -22,7 +22,7 @@ The most simple scenario you could find is using the default set of
 test, available in this gem. To do this you can simple run the ```lsperfm```
 from the root of your Logstash installation.
 
-If you like to add you own configurations and test suites,  you needuthe next data (you can see an example of them at the `examples/` directory):
+If you like to add you own configurations and test suites,  you need the next data (you can see an example of them at the `examples/` directory):
 
 - The logstash configs, found in `..config/`
 - The sample input files, found in `..input/`
@@ -105,7 +105,7 @@ It is more important to me that you are able to contribute.
 
 ### Contribution Steps
 
-1. Test your changes! Write test and run the test suites.t s
+1. Test your changes! Write test and run the test suites.
 2. Please make sure you have signed our [Contributor License
    Agreement](http://www.elastic.co/contributor-agreement/). We are not
    asking you to assign copyright to us, but to give us the right to distribute
