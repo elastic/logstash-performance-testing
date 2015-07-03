@@ -1,20 +1,28 @@
-# Integration Testing for Logstash
+# Performance Testing for Logstash
 
 ## Installation
 
-You can use this code as gem within your logstash project, to proceed with the installation you can either download the code and build the gem using the next command:
+You can use this code asd gem within your logstash project, to proceed with the installation you can either download the code and build the gem using the next command:
 
-```gem install [path to the gemspec file]```
+To run a benchmark using the Logstash Performance meter tool you will need to install this gem in your system, and to do it you can run the next command:
 
-or add it to your Gemfile like this:
+* ```gem install logstash-perftool```
 
-    gem 'lsit', :git => 'https://github.com/elasticssarch/logstash-integration-testing.git'
+This will make the last version of this gem available to you.
+
+or, if you like to be on the edge, you can add it to your Gemfile like this:
+
+    gem 'logstash-perftool', :git => 'https://github.com/elastic/logstash-performance-testing.git'
 
 and then do budler update.
 
-## Setup
+## Setup and Runtime
 
-To run the test you need to next data (you can see an example of them at the `examples/` directory):
+The most simple scenario you could find is using the default set of
+test, available in this gem. To do this you can simple run the ```lsperfm```
+from the root of your Logstash installation.
+
+If you like to add you own configurations and test suites,  you need to next data (you can see an example of them at the `examples/` directory):
 
 - The logstash configs, found in `..config/`
 - The sample input files, found in `..input/`
@@ -22,15 +30,14 @@ To run the test you need to next data (you can see an example of them at the `ex
 
 ### Configuration
 
-If you add a file names ```.lsit.yml``` into your main logstash directory
-you can have your configuration and input files in non standard
+If you add a file named ```.lsit.yml``` in your main logstash directory you can have your configuration and input files in non standard
 location.
 
 Example:
 
 ```
 default:
-  path: './lsit-config'
+  path: 'config-path'
   config: ''
   input: ''
 ```
@@ -39,22 +46,28 @@ default:
 
 Before you can run your test is necessary to bootstrap your logstash installation and install the test dependencies, to do that you must:
 
-If you are in 1.5:
+If you are in 1.5.x:
 - Run `rake bootstrap` to setup the system.
-- Run `lsit-deps` to install the test dependencies
+- Run `lsperfm-deps` to install the test dependencies
 For 1.4:
 - Run `bin/logstash deps` to setup everything.
 
 ## Performance tests
 
-Test can be run in groups of suites.
+The test are run in groups of suites.
 
-### How to run test suites
+### How to execute the default tests
+
+This is the most simple use case you can have. To run the default tests
+you can simply run ```lsperfm``` from the root of your Logstash
+installation and the tool will use the default test suite.
+
+### How to run a custom test suite
 
 - suites examples can be found in `examples/suite/`
 
 ```
-lsit-suite [suite definition]
+lsperfm [suite definition]
 ```
 
 a suite file defines a series of tests to run.
@@ -78,3 +91,29 @@ a suite file defines a series of tests to run.
   {:name => "complex syslog", :config => "config/complex_syslog.conf", :input => "input/syslog_acl_10.txt", :time => 60},
 ]
 ```
+
+## Contributing
+
+All contributions are welcome: ideas, patches, documentation, bug reports,
+complaints, and even something you drew up on a napkin.
+
+Programming is not a required skill. Whatever you've seen about open source and
+maintainers or community members  saying "send patches or die" - you will not
+see that here.
+
+It is more important to me that you are able to contribute.
+
+### Contribution Steps
+
+1. Test your changes! Run the test suite ('make test') 
+2. Please make sure you have signed our [Contributor License
+   Agreement](http://www.elastic.co/contributor-agreement/). We are not
+   asking you to assign copyright to us, but to give us the right to distribute
+   your code without restriction. We ask this of all contributors in order to
+   assure our users of the origin and continuing existence of the code. You
+   only need to sign the CLA once.
+3. Send a pull request! Push your changes to your fork of the repository and
+   [submit a pull
+   request](https://help.github.com/articles/using-pull-requests). In the pull
+   request, describe what your changes do and mention any bugs/issues related
+   to the pull request.
