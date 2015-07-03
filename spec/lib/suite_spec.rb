@@ -30,8 +30,8 @@ describe LogStash::PerfM::Core do
       let(:config) { '' }
 
       it "run each test case as expected" do
-        expect(runner).to receive(:read_input_file).with('./simple_10.txt').twice { [] }
-        expect(runner).to receive(:new).with("./simple.conf", false, logstash_home).twice { serial_runner }
+        expect(runner).to receive(:read_input_file).with('simple_10.txt').twice { [] }
+        expect(runner).to receive(:new).with("simple.conf", false, logstash_home).twice { serial_runner }
         manager.run
       end
 
