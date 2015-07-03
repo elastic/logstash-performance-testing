@@ -41,8 +41,6 @@ do
  cd ..
 done
 
-exit 0
-
 ## Setup the current codebase
 rm -rf "logstash"
 git clone git@github.com:elastic/logstash.git
