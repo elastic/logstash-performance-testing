@@ -105,7 +105,7 @@ It is more important to me that you are able to contribute.
 
 ### Contribution Steps
 
-1. Test your changes! Run the test suite ('make test') 
+1. Test your changes! Write test and run the test suites.
 2. Please make sure you have signed our [Contributor License
    Agreement](http://www.elastic.co/contributor-agreement/). We are not
    asking you to assign copyright to us, but to give us the right to distribute
