@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module LogStash
-  module PerfM
+  module PerformanceMeter
     class Reporter
       def start
         @reporter = Thread.new do

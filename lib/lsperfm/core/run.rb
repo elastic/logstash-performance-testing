@@ -7,7 +7,7 @@ require 'lsperfm/core/stats'
 
 Thread.abort_on_exception = true
 
-module LogStash::PerfM
+module LogStash::PerformanceMeter
 
   class Runner
     LOGSTASH_BIN  = File.join("bin", "logstash").freeze
@@ -25,7 +25,7 @@ module LogStash::PerfM
 
     def run(required_events_count, required_run_time, input_lines)
       puts("launching #{command.join(" ")} #{required_events_count} #{required_run_time}") if @debug
-      stats = LogStash::PerfM::Stats.new
+      stats = LogStash::PerformanceMeter::Stats.new
       real_events_count = 0
       Open3.popen3(*@command) do |i, o, e|
         puts("sending initial event") if @debug

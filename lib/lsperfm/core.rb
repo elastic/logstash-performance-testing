@@ -1,7 +1,7 @@
 require 'lsperfm/core/reporter'
 require 'lsperfm/core/run'
 
-module LogStash::PerfM
+module LogStash::PerformanceMeter
 
   class ConfigException < Exception; end
 
@@ -9,7 +9,7 @@ module LogStash::PerfM
 
     attr_reader :definition, :install_path, :runner, :config
 
-    def initialize(definition, install_path, config='', runner = LogStash::PerfM::Runner)
+    def initialize(definition, install_path, config='', runner = LogStash::PerformanceMeter::Runner)
       @definition   = definition
       @install_path = install_path
       @runner       = runner
@@ -19,7 +19,7 @@ module LogStash::PerfM
     def run(debug=false, headers=false)
       tests    = load_tests(definition)
       lines    = (headers ? ["name, #{runner.headers.join(',')}"] : [])
-      reporter = LogStash::PerfM::Reporter.new.start
+      reporter = LogStash::PerformanceMeter::Reporter.new.start
       tests.each do |test|
         events  = test[:events].to_i
         time    = test[:time].to_i
@@ -48,7 +48,7 @@ module LogStash::PerfM
 
     def load_default_tests
       require 'lsperfm/defaults/suite.rb'
-      LogStash::PerfM::DEFAULT_SUITE
+      LogStash::PerformanceMeter::DEFAULT_SUITE
     end
 
     def load_config(config)

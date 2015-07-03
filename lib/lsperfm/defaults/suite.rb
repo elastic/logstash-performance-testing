@@ -1,4 +1,4 @@
-module LogStash::PerfM
+module LogStash::PerformanceMeter
 
   base_dir = File.dirname(__FILE__)
 

@@ -6,4 +6,4 @@ $LOAD_PATH << "."
 
 require 'lsperfm'
 
-LogStash::PerfM.invoke
+LogStash::PerformanceMeter.invoke

@@ -2,7 +2,7 @@ require 'yaml'
 require 'lsperfm/core'
 
 module LogStash
-  module PerfM
+  module PerformanceMeter
 
     extend self
 
@@ -13,7 +13,7 @@ module LogStash
       install_path  = ARGV.size > 1 ? ARGV[1] : Dir.pwd
       definition    = ARGV.size > 0 ? ARGV[0] : ""
 
-      runner = LogStash::PerfM::Core.new(definition, install_path)
+      runner = LogStash::PerformanceMeter::Core.new(definition, install_path)
       runner.config = '.lsit' if File.exist?('.lsit.yml')
       puts runner.run(debug, headers).join("\n")
     end
