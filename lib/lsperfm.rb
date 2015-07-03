@@ -14,7 +14,7 @@ module LogStash
       definition    = ARGV.size > 0 ? ARGV[0] : ""
 
       runner = LogStash::PerformanceMeter::Core.new(definition, install_path)
-      runner.config = '.lsit' if File.exist?('.lsit.yml')
+      runner.config = '.lsperfm' if File.exist?('.lsperfm.yml')
       puts runner.run(debug, headers).join("\n")
     end
 

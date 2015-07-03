@@ -30,7 +30,7 @@ If you like to add you own configurations and test suites,  you needuthe next da
 
 ### Configuration
 
-If you add a file named ```.lsit.yml``` in your main logstash directory you can have your configuration and input files in non standard
+If you add a file named ```.lsperfm.yml``` in your main logstash directory you can have your configuration and input files in non standard
 location.
 
 Example:
