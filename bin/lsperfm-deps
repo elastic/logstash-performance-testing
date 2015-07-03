@@ -23,8 +23,8 @@ else
 
   [inputs, outputs, filters].each do |plugins|
     plugins.map{|s| "logstash-#{s}"}.each do |plugin|
-      command = "#{logstash} plugin install #{plugin}"
-      puts "#{command} #{%x[#{command}]}"
+      command = "#{File.join(base_dir, "bin", "plugin")} install #{plugin}"
+      puts "#{command}\n#{%x[#{command}]}"
     end
   end
 end
