@@ -1,5 +1,5 @@
 module LogStash
-  module PerfM
+  module PerformanceMeter
     VERSION='0.1.0'
   end
 end

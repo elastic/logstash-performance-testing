@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "logstash-perftool"
   gem.require_paths = ["lib"]
-  gem.version       = LogStash::PerfM::VERSION
+  gem.version       = LogStash::PerformanceMeter::VERSION
 
   gem.executables = ["lsperfm", "lsperfm-deps"]
 

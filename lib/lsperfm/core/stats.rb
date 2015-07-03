@@ -3,7 +3,7 @@ require "thread"
 
 Thread.abort_on_exception = true
 
-module LogStash::PerfM
+module LogStash::PerformanceMeter
 
   class Stats
 
