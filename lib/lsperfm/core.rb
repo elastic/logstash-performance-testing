@@ -16,9 +16,9 @@ module LogStash::PerfM
       @config       = load_config(config)
     end
 
-    def run(debug=false)
+    def run(debug=false, headers=false)
       tests    = load_tests(definition)
-      lines    = ["name, #{runner.headers.join(',')}"]
+      lines    = (headers ? ["name, #{runner.headers.join(',')}"] : [])
       reporter = LogStash::PerfM::Reporter.new.start
       tests.each do |test|
         events  = test[:events].to_i
