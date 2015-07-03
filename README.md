@@ -2,7 +2,7 @@
 
 ## Installation
 
-You can use this code asd gem within your logstash project, to proceed with the installation you can either download the code and build the gem using the next command:
+You can use this code as a gem within your logstash project, to proceed with the installation you can either download the code and build the gem using the next command:
 
 To run a benchmark using the Logstash Performance meter tool you will need to install this gem in your system, and to do it you can run the next command:
 
@@ -22,7 +22,7 @@ The most simple scenario you could find is using the default set of
 test, available in this gem. To do this you can simple run the ```lsperfm```
 from the root of your Logstash installation.
 
-If you like to add you own configurations and test suites,  you need to next data (you can see an example of them at the `examples/` directory):
+If you like to add you own configurations and test suites,  you needuthe next data (you can see an example of them at the `examples/` directory):
 
 - The logstash configs, found in `..config/`
 - The sample input files, found in `..input/`
@@ -54,7 +54,7 @@ For 1.4:
 
 ## Performance tests
 
-The test are run in groups of suites.
+The test are run in groups called suites.
 
 ### How to execute the default tests
 
@@ -105,7 +105,7 @@ It is more important to me that you are able to contribute.
 
 ### Contribution Steps
 
-1. Test your changes! Write test and run the test suites.
+1. Test your changes! Write test and run the test suites.t s
 2. Please make sure you have signed our [Contributor License
    Agreement](http://www.elastic.co/contributor-agreement/). We are not
    asking you to assign copyright to us, but to give us the right to distribute
