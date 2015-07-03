@@ -7,7 +7,6 @@ TODAY=`date +%s`
 VERSIONS=( 1.4.2 1.5.0 1.5.1 1.5.2 )
 DEST_DIR="workspace"
 
-rm -rf $DEST_DIR
 mkdir -p $DEST_DIR
 
 ## Download released versions.
