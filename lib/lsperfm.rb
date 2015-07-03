@@ -7,14 +7,15 @@ module LogStash
     extend self
 
     def invoke
-      debug  = !!ENV['DEBUG']
+      debug   = !!ENV['DEBUG']
+      headers = !!ENV['HEADERS']
 
       install_path  = ARGV.size > 1 ? ARGV[1] : Dir.pwd
       definition    = ARGV.size > 0 ? ARGV[0] : ""
 
       runner = LogStash::PerfM::Core.new(definition, install_path)
       runner.config = '.lsit' if File.exist?('.lsit.yml')
-      puts runner.run(debug).join("\n")
+      puts runner.run(debug, headers).join("\n")
     end
 
   end
