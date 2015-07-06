@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://logstash.net/"
   gem.license       = "Apache License (2.0)"
 
-  gem.files         = `git ls-files`.split($\)
+  gem.files         = Dir.glob(["logstash-perftool.gemspec", "lib/**/*", "spec/**/*.rb", "bin/*"])
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "logstash-perftool"
   gem.require_paths = ["lib"]

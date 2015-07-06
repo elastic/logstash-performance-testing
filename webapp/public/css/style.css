@@ -1,0 +1,102 @@
+
+#wrapper {
+  margin: 3em;
+}
+
+body {
+}
+#body {
+  margin: 0 auto;
+  width: 80%;
+}
+
+#body h2 {
+  color: #C1C3C9;
+}
+
+#body h3 {
+}
+
+#events-chart {
+  padding: 10px;
+}
+.charts-table {
+  display: table;
+}
+
+.charts-row {
+  display: table-row;
+}
+
+.chart {
+  display: table-cell;
+  border:5px solid transparent;
+  padding: 10px;
+  margin: 0 auto;
+}
+.chart canvas {
+}
+
+.line-legend {
+  font-size: small;
+  padding-bottom: 5px;
+}
+
+ul.legend {
+  list-style-type: none;
+}
+
+ul.legend li {
+  display: inline;
+}
+
+ul.legend li {
+  width: 6em;
+  text-decoration: none;
+  padding: 0.2em 0.6em;
+  color: white;
+  font-weight: bold;
+  border-right: 1px solid white;
+}
+
+#header {
+  background-color: #6d94e7;
+  padding: 4px;
+}
+#header .title {
+  color: white;
+  padding: 0;
+  font-size: 33px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#header .subtitle {
+  color: white;
+  font-size: 22px;
+  text-align: center;
+}
+
+.logstash-logo {
+  position:fixed;
+  top: 0;
+  width: 100px;
+}
+
+.logstash-logo img {
+  width: 100px;
+}
+
+.logstash-logo .title {
+  background-color: #6d94e7;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+#footer {
+  padding: 4px;
+  color: white;
+  background-color: #6d94e7;
+  text-align: center;
+}
