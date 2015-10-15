@@ -2,9 +2,12 @@
 # each test can be executed by either target duration using :time => N secs
 # or by number of events with :events => N
 #
+# you can specify the number of filter worker threads for each test with :workers => N
+# if you don't specify workers, it defaults to 1
+#
 #[
 #  {:name => "simple json out", :config => "config/simple_json_out.conf", :input => "input/simple_10.txt", :time => 30},
-#  {:name => "simple json out", :config => "config/simple_json_out.conf", :input => "input/simple_10.txt", :events => 50000},
+#  {:workers => 2, :name => "simple json out", :config => "config/simple_json_out.conf", :input => "input/simple_10.txt", :events => 50000},
 #]
 #
 [

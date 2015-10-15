@@ -18,9 +18,9 @@ module LogStash::PerformanceMeter
 
     attr_reader :command
 
-    def initialize(config, debug = false, logstash_home = Dir.pwd)
+    def initialize(config, workers = "1", debug = false, logstash_home = Dir.pwd)
       @debug = debug
-      @command = [File.join(logstash_home, LOGSTASH_BIN), "-f", config]
+      @command = [File.join(logstash_home, LOGSTASH_BIN), "-f", config, "-w", workers]
     end
 
     def run(required_events_count, required_run_time, input_lines)
