@@ -82,6 +82,11 @@ a suite file defines a series of tests to run.
 # you can specify the number of filter worker threads for each test with :workers => N
 # if you don't specify workers, it defaults to 1
 #
+# Note: Logstash 2.0 has new default worker thread behavior: It defaults to half the number
+# of cpus for the number of worker threads. So a 4 CPU machine would get 2 threads by default.
+# This is different than logstash 1.x where the default was always 1 worker thread. Lsperfm
+# will *always* default to 1 worker regardless of logstash version.
+#
 #[
 #  {:name => "simple json out", :config => "config/simple_json_out.conf", :input => "input/simple_10.txt", :time => 30},
 #  {:workers => 2, :name => "simple json out", :config => "config/simple_json_out.conf", :input => "input/simple_10.txt", :events => 50000},
