@@ -23,7 +23,7 @@ module LogStash::PerformanceMeter
       tests.each do |test|
         events  = test[:events].to_i
         time    = test[:time].to_i
-        workers = test[:workers] ? test[:workers].to_s : "1"
+        workers = test[:workers] ? test[:workers] : 1
 
         manager = runner.new(find_test_config(test[:config]), workers, debug, install_path)
         metrics = manager.run(events, time, runner.read_input_file(find_test_input(test[:input])))
