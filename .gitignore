@@ -2,3 +2,4 @@
 *.gem
 config.txt
 workspace/
+utils/
