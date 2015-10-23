@@ -23,11 +23,6 @@
     <%= erb :_chart_selector, :locals => {:id => "test-events", :title => "Number of events"} %>
     <%= erb :_chart_selector, :locals => {:id => "test-tps", :title => "Transactions / second"} %>
 
-    <h2>Results per bundle</h2>
-    <p> By choosing a version label, you will be able to see in this part, the evolution of each test over time</p>
-    <%= erb :_chart_selector, :locals => {:id => "events", :title => "Number of events"} %>
-    <%= erb :_chart_selector, :locals => {:id => "tps", :title => "Transactions / second"} %>
-
     <h2>Aggregated results</h2>
     <p> Never the less to see aggregated results is also nice, in this last section you will see how the aggregation of all test executed are performing over time.</p>
     <%= erb :_chart,          :locals => {:id => "events", :title => "Number of events generated"} %>
