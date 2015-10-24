@@ -7,7 +7,7 @@ module Microsite
   class Charts
 
     def self.fetch(attribute)
-      body = QueryBuilder.filtered_query(:gte => "now-7d")
+      body = QueryBuilder.filtered_query(:gte => "now-90d")
       body[:size] = 0
       body[:aggs] = QueryBuilder.histogram[:aggs]
       body[:aggs][:timestamps][:aggs] = QueryBuilder.agggreation("label.raw", attribute)[:aggs]
@@ -15,7 +15,7 @@ module Microsite
     end
 
     def self.fetch_per_bundle(bundle, attribute)
-      body = QueryBuilder.filtered_query(:field => "label.raw", :value => bundle, :gte => "now-7d")
+      body = QueryBuilder.filtered_query(:field => "label.raw", :value => bundle, :gte => "now-90d")
       body[:size] = 0
       body[:aggs] = QueryBuilder.histogram[:aggs]
       body[:aggs][:timestamps][:aggs] = QueryBuilder.agggreation("name.raw", attribute)[:aggs]
@@ -23,7 +23,7 @@ module Microsite
     end
 
     def self.fetch_per_test(test, attribute)
-      body = QueryBuilder.filtered_query(:field => "name.raw", :value => test, :gte => "now-7d")
+      body = QueryBuilder.filtered_query(:field => "name.raw", :value => test, :gte => "now-90d")
       body[:size] = 0
       body[:aggs] = QueryBuilder.histogram[:aggs]
       body[:aggs][:timestamps][:aggs] = QueryBuilder.agggreation("label.raw", attribute)[:aggs]
