@@ -64,7 +64,6 @@ $.ajax({
     var eventsChart = new Chart(ctx).Line(data, options);
     var legend      = eventsChart.generateLegend();
     $('#events-placeholder').append(legend);
-
   }
 });
 
@@ -145,7 +144,10 @@ function load_events(version) {
       }
       $("#label-events-chart").show();
       var ctx = document.getElementById("label-events-chart").getContext("2d");
-      window.charts.events_label = new Chart(ctx).Line(data, options);
+      var eventsChart = new Chart(ctx).Line(data, options);
+      var legend      = eventsChart.generateLegend();
+      $('#test-events-placeholder').append(legend);
+      window.charts.events_label = eventsChart;
     },
     error: function(data) {
       if (window.charts.events_label != undefined) {
@@ -167,13 +169,18 @@ function load_events_by_test(test) {
       }
       $("#label-test-events-chart").show();
       var ctx = document.getElementById("label-test-events-chart").getContext("2d");
-      window.charts.test_events_label = new Chart(ctx).Line(data, options);
+      var eventsChart = new Chart(ctx).Line(data, options);
+      var legend      = eventsChart.generateLegend();
+      $('#test-events-placeholder').empty();
+      $('#test-events-placeholder').append(legend);
+      window.charts.test_events_label = eventsChart;
     },
     error: function(data) {
       if (window.charts.test_events_label != undefined) {
         window.charts.test_events_label.destroy();
       }
       $("#label-test-events-chart").hide();
+      $('#test-events-placeholder').hide();
     }
   });
 }
