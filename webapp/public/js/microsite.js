@@ -180,7 +180,6 @@ function load_events_by_test(test) {
         window.charts.test_events_label.destroy();
       }
       $("#label-test-events-chart").hide();
-      $('#test-events-placeholder').hide();
     }
   });
 }
