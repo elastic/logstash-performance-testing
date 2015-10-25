@@ -189,7 +189,6 @@ function load_events_by_test(test) {
         $("#test-events-legend").append(str);
       }
       var eventsChart = new Chart(ctx).Line(data, options);
-      delete options['customTooltips']
       window.charts.test_events_label = eventsChart;
     },
     error: function(data) {
@@ -234,6 +233,25 @@ function load_tps_per_test(test) {
       }
       $("#label-test-tps-chart").show();
       var ctx = document.getElementById("label-test-tps-chart").getContext("2d");
+      options['customTooltips'] =  function(tooltip) {
+
+        // tooltip will be false if tooltip is not visible or should be hidden
+        if (!tooltip) {
+          return;
+        }
+        // Otherwise, tooltip will be an object with all tooltip properties like:
+        var str = "<ul class='legend'>";
+        str += "<li class='first'>"+tooltip.title+"</li>"
+        for(var i=0; i < tooltip.labels.length; i++) {
+          var v = tooltip.labels[i].split(":");
+          if ( v[1] > 0 ) {
+            str += "<li style='background-color:"+tooltip.legendColors[i].fill+"'>"+tooltip.labels[i]+"</li>"
+          }
+        }
+        str += "</ul>"
+        $("#test-tps-legend").empty();
+        $("#test-tps-legend").append(str);
+      }
       window.charts.test_tps_label = new Chart(ctx).Line(data, options);
     },
     error: function(data) {
