@@ -49,7 +49,7 @@ var options = {
   +'</li>'
   +'<% } %>'
   +'</ul>',
-
+  showTooltips: false,
   multiTooltipTemplate: "<%=datasetLabel%> : <%= value %>"
 };
 
