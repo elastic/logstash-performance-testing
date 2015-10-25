@@ -2,8 +2,11 @@
   <div class="header">
     <h3><%= title %></h3>
     Label: <select id="<%= id %>-version_selector"></select> 
-    <span id="<%= id %>-placeholder"></span>
-    <div id="<%= id %>-legend"></div>
   </div>
-  <canvas id="label-<%= id %>-chart" width="1280" height="720"></canvas>
+  <table>
+    <tr>
+      <td><canvas id="label-<%= id %>-chart" width="1280" height="720"></canvas></td>
+      <td style="vertical-align: top"><div id="<%= id %>-legend"></div></td>
+    </tr>
+  </table>
 </div>

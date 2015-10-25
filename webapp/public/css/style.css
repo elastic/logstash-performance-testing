@@ -7,7 +7,7 @@ body {
 }
 #body {
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
 }
 
 #body h2 {
@@ -44,10 +44,6 @@ body {
 
 ul.legend {
   list-style-type: none;
-}
-
-ul.legend li {
-  display: inline;
 }
 
 ul.legend li {
