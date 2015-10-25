@@ -49,7 +49,7 @@ var options = {
   +'</li>'
   +'<% } %>'
   +'</ul>',
-  showTooltips: false,
+  showTooltips: true,
   multiTooltipTemplate: "<%=datasetLabel%> : <%= value %>"
 };
 
@@ -169,10 +169,27 @@ function load_events_by_test(test) {
       }
       $("#label-test-events-chart").show();
       var ctx = document.getElementById("label-test-events-chart").getContext("2d");
+      options['customTooltips'] =  function(tooltip) {
+
+        // tooltip will be false if tooltip is not visible or should be hidden
+        if (!tooltip) {
+          return;
+        }
+        // Otherwise, tooltip will be an object with all tooltip properties like:
+        var str = "<ul class='legend'>";
+        str += "<li class='first'>"+tooltip.title+"</li>"
+        for(var i=0; i < tooltip.labels.length; i++) {
+          var v = tooltip.labels[i].split(":");
+          if ( v[1] > 0 ) {
+            str += "<li style='background-color:"+tooltip.legendColors[i].fill+"'>"+tooltip.labels[i]+"</li>"
+          }
+        }
+        str += "</ul>"
+        $("#test-events-legend").empty();
+        $("#test-events-legend").append(str);
+      }
       var eventsChart = new Chart(ctx).Line(data, options);
-      var legend      = eventsChart.generateLegend();
-      $('#test-events-placeholder').empty();
-      $('#test-events-placeholder').append(legend);
+      delete options['customTooltips']
       window.charts.test_events_label = eventsChart;
     },
     error: function(data) {

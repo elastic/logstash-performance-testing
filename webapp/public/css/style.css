@@ -59,6 +59,10 @@ ul.legend li {
   border-right: 1px solid white;
 }
 
+ul.legend li.first {
+  color:black;
+}
+
 #header {
   background-color: #6d94e7;
   padding: 4px;
