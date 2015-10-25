@@ -168,6 +168,8 @@ function load_events_by_test(test) {
         window.charts.test_events_label.destroy();
       }
       $("#label-test-events-chart").show();
+      $("#test-events-legend").show();
+      $("#test-events-legend").empty();
       var ctx = document.getElementById("label-test-events-chart").getContext("2d");
       options['customTooltips'] =  function(tooltip) {
 
@@ -196,6 +198,7 @@ function load_events_by_test(test) {
         window.charts.test_events_label.destroy();
       }
       $("#label-test-events-chart").hide();
+      $("#test-events-legend").hide();
     }
   });
 }
@@ -232,6 +235,8 @@ function load_tps_per_test(test) {
         window.charts.test_tps_label.destroy();
       }
       $("#label-test-tps-chart").show();
+      $("#test-tps-legend").show();
+      $("#test-tps-legend").empty();
       var ctx = document.getElementById("label-test-tps-chart").getContext("2d");
       options['customTooltips'] =  function(tooltip) {
 
@@ -259,6 +264,7 @@ function load_tps_per_test(test) {
         window.charts.test_tps_label.destroy();
       }
       $("#label-test-tps-chart").hide();
+      $("#test-tps-legend").hide();
     }
   });
 }
