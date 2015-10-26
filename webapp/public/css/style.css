@@ -34,12 +34,16 @@ body {
   padding: 10px;
   margin: 0 auto;
 }
-.chart canvas {
-}
 
 .line-legend {
   font-size: small;
   padding-bottom: 5px;
+}
+
+canvas{
+    width: 100% !important;
+    min-width: 800px;
+    height: 480px;
 }
 
 ul.legend {

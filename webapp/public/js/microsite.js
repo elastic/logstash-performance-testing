@@ -1,5 +1,7 @@
 var options = {
 
+  responsive: true,
+
   ///Boolean - Whether grid lines are shown across the chart
   scaleShowGridLines : true,
 
