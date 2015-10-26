@@ -7,7 +7,7 @@ body {
 }
 #body {
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
 }
 
 #body h2 {
@@ -34,20 +34,20 @@ body {
   padding: 10px;
   margin: 0 auto;
 }
-.chart canvas {
-}
 
 .line-legend {
   font-size: small;
   padding-bottom: 5px;
 }
 
-ul.legend {
-  list-style-type: none;
+canvas{
+    width: 100% !important;
+    min-width: 800px;
+    height: 480px;
 }
 
-ul.legend li {
-  display: inline;
+ul.legend {
+  list-style-type: none;
 }
 
 ul.legend li {
@@ -57,6 +57,10 @@ ul.legend li {
   color: white;
   font-weight: bold;
   border-right: 1px solid white;
+}
+
+ul.legend li.first {
+  color:black;
 }
 
 #header {

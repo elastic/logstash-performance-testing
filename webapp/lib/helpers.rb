@@ -21,6 +21,7 @@ module AppHelpers
       data['datasets'] << build_dataset(label,values, colors)
       i=i+1
     end
+    data["labels"].map! do |e| Date.parse(e).strftime end
     data
   end
 
