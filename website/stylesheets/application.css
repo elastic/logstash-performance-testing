@@ -38,6 +38,9 @@ header p {
 }
 
 #startup-time-chart {
+  position: absolute;
+  right: 103px;
+  top: -27px;
 }
 
 #main-chart {
