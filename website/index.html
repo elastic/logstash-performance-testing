@@ -6,7 +6,25 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/application.css">
 </head>
 <body>
-  <h1>Logstash Benchmarks</h1>
+  <header>
+    <h1>Logstash Benchmarks</h1>
+    <p>
+      Displaying the number of events Logstash is able to generate when running for two minutes.
+      Showing aggregated values acrross all configurations —
+      click one of the smaller charts below to display a specific configuration.
+    </p>
+    <div id="startup-time-chart"></div>
+  </header>
+
+  <div id="main-chart"></div>
+  <div id="matrix-chart"></div>
+
+  <footer>
+    <p>
+      &copy; Elastic.co 2015 |
+      Source at <a href="http://github.com/elastic/logstash-performance-testing">Github</a>
+    </p>
+  </footer>
 
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="javascripts/application.js"></script>
