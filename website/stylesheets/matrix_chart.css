@@ -1,0 +1,67 @@
+#matrix-chart {
+  max-width: 1350px;
+  padding: 0 0 0 5px;
+}
+#matrix-chart .chart {
+  margin: 5px;
+  padding: 0 0.5em 0 0.5em;
+  display: inline-block;
+}
+#matrix-chart .chart:hover {
+  background: #efefef;
+  display: inline-block;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#matrix-chart .chart:hover svg {
+  cursor: pointer;
+}
+#matrix-chart .area {
+  fill: #999;
+}
+#matrix-chart .axis path,
+#matrix-chart .axis line {
+  fill: none;
+  stroke: none;
+  shape-rendering: crispEdges;
+}
+#matrix-chart .axis .domain {
+  stroke: #333;
+  stroke-width: 1px;
+}
+#matrix-chart .axis text {
+  fill: #6c6c6c;
+  font-family: sans-serif;
+  font-size: 8px;
+  font-weight: lighter;
+  shape-rendering: crispEdges;
+}
+#matrix-chart .x.axis .tick .ruler {
+  stroke: #444;
+  stroke-width: 1px;
+  display: none;
+}
+#matrix-chart .x.axis .tick.over .ruler {
+  display: block;
+}
+#matrix-chart .x.axis .tick .label {
+  fill: #444;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 8px;
+  display: none;
+}
+#matrix-chart .x.axis .tick.over .label {
+  display: block;
+}
+#matrix-chart text.legend {
+  fill: #444;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  font-weight: lighter;
+}
+#matrix-chart .chart line.average {
+  stroke: #000;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+  opacity: 0.1;
+}
