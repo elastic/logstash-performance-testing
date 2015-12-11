@@ -37,7 +37,7 @@ App.startupTimeChart = function (options) {
 
       bar.enter()
         .append("line")
-          .attr('id', function(d,i) { return 'line-' + i})
+          .attr('id', function(d,i) { return parameterize('startup-time-line-' + d.time) })
           .attr('class', 'bar');
 
       bar
@@ -58,7 +58,7 @@ App.startupTimeChart = function (options) {
 
         label.enter()
           .append('g')
-            .attr('id', function(d,i) { return 'label-startup-time-' + i })
+            .attr('id', function(d,i) { return parameterize('startup-time-label-' + d.time) })
             .attr('class', 'label')
             .attr('transform', function(d) { return 'translate(' + x(d.time) + ', -5)' } )
             .append('text')
@@ -70,12 +70,10 @@ App.startupTimeChart = function (options) {
 
 
     bar.on('mouseover', function(d,i) {
-      d3.select(this).classed('over', true)
-      d3.select('#label-startup-time-'+i).classed('over', true)
+      chart.focus.call(this, d.time, i)
     });
     bar.on('mouseout', function(d,i) {
-      d3.select(this).classed('over', false)
-      d3.select('#label-startup-time-'+i).classed('over', false)
+      chart.unfocus.call(this, d.time, i)
     });
 
     return this
@@ -187,6 +185,23 @@ App.startupTimeChart = function (options) {
     });
   };
 
+  chart.focus = function(date, index) {
+    var element = d3.select('#' + parameterize('startup-time-line-' + date));
+
+    element.classed('over', true)
+    d3.select( '#' + parameterize('startup-time-label-' + date) ).classed('over', true)
+
+    return this
+  };
+
+  chart.unfocus = function(date, index) {
+    var element = d3.select('#' + parameterize('startup-time-line-' + date));
+
+    element.classed('over', false)
+    d3.select( '#' + parameterize('startup-time-label-' + date) ).classed('over', false)
+
+    return this
+  }
 
   return chart;
 };

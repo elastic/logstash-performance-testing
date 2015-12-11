@@ -78,7 +78,34 @@ App.timeLineChart = function(json, options) {
     container.datum(
       configuration ? json[configuration] : aggregated_data()
     ).call(line_chart);
+    return this
   };
+
+  function focus(date) {
+    var element = container.select('#' + parameterize('timeline-tick-' + date));
+
+    if ( element.classed('locked') ) { return }
+
+    element.select('.ruler').classed('off', false)
+    container.select('#' + parameterize('label-' + date)).classed('off', false)
+    element.select('.ruler').classed('on', true)
+    container.select('#' + parameterize('label-' + date)).classed('on', true)
+
+    return this
+  }
+
+  function unfocus(date) {
+    var element = container.select('#' + parameterize('timeline-tick-' + date));
+
+    if ( element.classed('locked') ) { return }
+
+    element.select('.ruler').classed('off', true)
+    container.select('#' + parameterize('label-' + date)).classed('off', true)
+    element.select('.ruler').classed('on', false)
+    container.select('#' + parameterize('label-' + date)).classed('on', false)
+
+    return this
+  }
 
   // The main function
   //
@@ -305,23 +332,24 @@ App.timeLineChart = function(json, options) {
           .style('font-weight', function(d) { return d.getDate() == 1 ? 'bolder' : 'normal' });
 
       container.selectAll('.x.axis g.tick')
+        .attr('id', function(d) { return parameterize('timeline-tick-'+d) })
         .append('line')
-        .attr('id', function(d) { return parameterize('ruler-'+d) })
-        .attr('y1', -height-margin.top)
-        .attr('y2', 0)
-        .classed('ruler', true);
+          .attr('id', function(d) { return parameterize('ruler-'+d) })
+          .attr('y1', -height-margin.top)
+          .attr('y2', 0)
+          .classed('ruler', true);
       container.selectAll('.x.axis g.tick')
         .append('rect')
-        .attr('x', -5)
-        .attr('y', -(height-margin.top-margin.bottom))
-        .attr('width', function(d) {
-          tickArr = xScale.ticks()
-          difference = xScale(tickArr[tickArr.length - 1]) - xScale(tickArr[tickArr.length - 2])
-          return difference/7;
-        })
-        .attr('height', height+margin.bottom)
-        .classed('overlay', true)
-        .style('opacity', 0);
+          .attr('x', -5)
+          .attr('y', -(height-margin.top-margin.bottom))
+          .attr('width', function(d) {
+            tickArr = xScale.ticks()
+            difference = xScale(tickArr[tickArr.length - 1]) - xScale(tickArr[tickArr.length - 2])
+            return difference/7;
+          })
+          .attr('height', height+margin.bottom)
+          .classed('overlay', true)
+          .style('opacity', 0);
 
       // [7] Y-Axis
       container.select(".y.axis")
@@ -422,21 +450,11 @@ App.timeLineChart = function(json, options) {
 
       // Interactivity
       container.selectAll('.x.axis g.tick .overlay')
-        .on('mouseover', function(d) {
-          if ( d3.select(this.parentNode).classed('locked') ) { return }
-
-          d3.select(this.parentNode).select('.ruler').classed('off', false)
-          selection.select('#' + parameterize('label-' + d)).classed('off', false)
-          d3.select(this.parentNode).select('.ruler').classed('on', true)
-          selection.select('#' + parameterize('label-' + d)).classed('on', true)
+        .on('mouseover', function(d, i) {
+          focus.call(this, d)
         })
-        .on('mouseout', function(d)  {
-          if ( d3.select(this.parentNode).classed('locked') ) { return }
-
-          d3.select(this.parentNode).select('.ruler').classed('off', true)
-          selection.select('#' + parameterize('label-' + d)).classed('off', true)
-          d3.select(this.parentNode).select('.ruler').classed('on', false)
-          selection.select('#' + parameterize('label-' + d)).classed('on', false)
+        .on('mouseout', function(d, i) {
+          unfocus.call(this, d)
         })
         .on('click', function(d)  {
           var tick = d3.select(this.parentNode)
@@ -502,8 +520,10 @@ App.timeLineChart = function(json, options) {
   };
 
   return {
-    json:  json,
+    json:    json,
     options: options,
-    draw: draw
+    draw:    draw,
+    focus:   focus,
+    unfocus: unfocus,
   };
 }

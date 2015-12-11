@@ -6,6 +6,24 @@ App.matrixChart = function(json, options) {
 
   var selection = options.selection || d3.select("#matrix-chart");
 
+  var parameterize = function(s) {
+        return s.toLowerCase().replace(/[^a-z0-9]/g, "-")
+      };
+
+  function focus(date) {
+    var elements = selection.selectAll('.' + parameterize('matrix-chart-tick-' + date));
+    elements.classed('over', true);
+
+    return this
+  };
+
+  function unfocus(date) {
+    var elements = selection.selectAll('.' + parameterize('matrix-chart-tick-' + date));
+    elements.classed('over', false);
+
+    return this
+  };
+
   var draw = function() {
     var all_values = d3.values(json)
           .map(
@@ -116,6 +134,7 @@ App.matrixChart = function(json, options) {
       tick.selectAll('.domain').remove(); // Remove x-axis domain
 
       tick.selectAll('.x.axis g.tick')
+        .attr('class', function(d) { return 'tick ' + parameterize('matrix-chart-tick-' + d) })
         .append('line')
         .attr('y1', -12)
         .attr('y2', height)
@@ -163,17 +182,23 @@ App.matrixChart = function(json, options) {
       // Interactivity
 
       svg.selectAll('.x.axis g.tick .overlay')
-        .on('mouseover', function(d) { d3.select(this.parentNode).classed('over', true)  })
-        .on('mouseout', function(d)  { d3.select(this.parentNode).classed('over', false) })
+        .on('mouseover', function(d, i) {
+          focus.call(this, d)
+        })
+        .on('mouseout', function(d, i)  {
+          unfocus.call(this, d)
+        })
     })
 
     return this
   };
 
   return {
-    json:  json,
+    json:    json,
     options: options,
     selection: selection,
-    draw:    draw
+    draw:    draw,
+    focus:   focus,
+    unfocus: unfocus
   }
 };
