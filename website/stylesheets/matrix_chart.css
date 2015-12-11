@@ -10,18 +10,14 @@
   display: inline-block;
 }
 #matrix-chart .chart:hover {
-  background: #efefef;
+  background: #e5e5e5;
   cursor: pointer;
-}
-#matrix-chart .chart.selected {
-  background: #ccc;
-  transition: 250ms;
 }
 #matrix-chart .chart:hover svg {
   cursor: pointer;
 }
 #matrix-chart .area {
-  fill: #999;
+  fill: #808080;
 }
 #matrix-chart .axis path,
 #matrix-chart .axis line {
@@ -30,7 +26,7 @@
   shape-rendering: crispEdges;
 }
 #matrix-chart .axis .domain {
-  stroke: #333;
+  stroke: #666;
   stroke-width: 1px;
 }
 #matrix-chart .axis text {
@@ -68,4 +64,13 @@
   stroke-width: 1px;
   shape-rendering: crispEdges;
   opacity: 0.1;
+}
+
+#matrix-chart .chart.selected {
+  background: #dbdbdb;
+  transition: 250ms;
+}
+#matrix-chart .chart.selected text.legend {
+  fill: #000;
+  transition: 250ms;
 }

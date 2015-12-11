@@ -48,11 +48,12 @@ header p small {
 }
 
 header p strong {
-  color: #000;
-  background: #ccc;
+  color: #222;
+  background: #dbdbdb;
   font-size: 10px;
   font-family: 'Menlo', monospace;
-  padding: 0.25em 0.75em;
+  padding: 0.3em 0.75em 0.25em 0.75em;
+  margin: 0 0.1em 0 0.1em;
   border-radius: 5px;
   transition: 250ms;
 }
