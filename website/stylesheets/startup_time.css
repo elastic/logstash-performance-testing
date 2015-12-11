@@ -3,15 +3,25 @@
   shape-rendering: crispEdges;
 }
 #startup-time-chart line {
+  shape-rendering: crispEdges;
+}
+#startup-time-chart line.bar {
   stroke: #999;
   stroke-width: 2px;
-  shape-rendering: crispEdges;
 }
 #startup-time-chart line.missing {
   stroke: #ccc;
 }
 #startup-time-chart line.over {
   stroke: #666;
+}
+#startup-time-chart line.ruler {
+  stroke: #ccc;
+  stroke-width: 1px;
+}
+#startup-time-chart line.legend-ruler {
+  stroke: #999;
+  stroke-width: 2px;
 }
 #startup-time-chart .chart-legend {
   fill: #a6a6a6;
@@ -44,7 +54,7 @@
 }
 #startup-time-chart g.label {
   color: #666;
-  font-size: 10px;
+  font-size: 8px;
   display: none;
 }
 #startup-time-chart g.label.over {

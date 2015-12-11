@@ -32,6 +32,30 @@ App.startupTimeChart = function (options) {
   // Draw
   //
   var draw = function(svg, data) {
+    var labels = svg.selectAll('g.label')
+        .data(data, function(d) { return d.time });
+
+        var label = labels.enter()
+            .append('g')
+              .attr('id', function(d,i) { return parameterize('startup-time-label-' + d.time) })
+              .attr('class', 'label')
+              .attr('transform', function(d) { return 'translate(' + x(d.time) + ', -5)' } )
+
+            label.append('line')
+              .attr('y1', 5)
+              .attr('y2', height-margin.top-margin.bottom)
+              .attr('stroke-dasharray', '1,1')
+              .attr('transform', 'translate(1,0)' )
+              .classed('ruler', true)
+
+            label.append('text')
+
+        labels.exit()
+          .remove()
+
+        labels.select('text').text(function(d) { return d.value + 's' });
+
+
     var bar = svg.selectAll('line.bar')
         .data(data, function(d) { return d.time });
 
@@ -52,22 +76,6 @@ App.startupTimeChart = function (options) {
 
       bar.exit()
         .remove();
-
-    var label = svg.selectAll('g.label')
-        .data(data, function(d) { return d.time });
-
-        label.enter()
-          .append('g')
-            .attr('id', function(d,i) { return parameterize('startup-time-label-' + d.time) })
-            .attr('class', 'label')
-            .attr('transform', function(d) { return 'translate(' + x(d.time) + ', -5)' } )
-            .append('text')
-
-        label.exit()
-          .remove()
-
-    label.select('text').text(function(d) { return d.value + 's' });
-
 
     bar.on('mouseover', function(d,i) {
       chart.focus.call(this, d.time, i)
@@ -176,6 +184,7 @@ App.startupTimeChart = function (options) {
         .attr('x2', width-margin.left-margin.right+1)
         .attr('y1', height - margin.top - margin.bottom)
         .attr('y2', height - margin.top - margin.bottom)
+        .classed('legend-ruler', true)
 
       svg.append("text")
         .attr('x', width - margin.right - 3)
