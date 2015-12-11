@@ -10,7 +10,7 @@
   display: inline-block;
 }
 #matrix-chart .chart:hover {
-  background: #e5e5e5;
+  background: #e3e5e5;
   cursor: pointer;
 }
 #matrix-chart .chart:hover svg {
@@ -67,7 +67,7 @@
 }
 
 #matrix-chart .chart.selected {
-  background: #dbdbdb;
+  background: #e1e5e5;
   transition: 250ms;
 }
 #matrix-chart .chart.selected text.legend {

@@ -5,7 +5,7 @@ html {
 
 body {
   color: #222;
-  background: #fff;
+  background: #fcfcfc;
   font-family: 'Open Sans', sans-serif;
   margin: 2em 2em 2em 2em;
 }
@@ -25,7 +25,7 @@ header h1 {
   color: #59627b;
   font-size: 28px;
   font-weight: lighter;
-  letter-spacing: -0.01em;
+  letter-spacing: -1px;
   margin: 0;
   padding: 0 0 0.1em 0;
 }
@@ -49,7 +49,7 @@ header p small {
 
 header p strong {
   color: #222;
-  background: #dbdbdb;
+  background: #e1e5e5;
   font-size: 10px;
   font-family: 'Menlo', monospace;
   padding: 0.3em 0.75em 0.25em 0.75em;

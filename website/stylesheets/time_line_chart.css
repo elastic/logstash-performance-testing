@@ -11,19 +11,19 @@
 #main-chart .series.legend.dimmed rect { fill: #999 !important; }
 #main-chart .tick line { stroke: #000000; shape-rendering: crispedges; }
 #main-chart .tick text { text-anchor: right !important; }
-#main-chart .tick line.ruler { stroke: #ccc; }
-#main-chart .tick.locked line.ruler { stroke: #444 !important; }
+#main-chart .tick line.ruler { stroke: #efefef; }
+#main-chart .tick.locked line.ruler { stroke: #666 !important; }
 #main-chart .x.axis .tick line { stroke: #ccc; }
 #main-chart .x.axis .tick text { font-size: 8px; fill: #999; }
-#main-chart .x.axis .tick line.ruler { stroke: #efefef; display: none; }
+#main-chart .x.axis .tick line.ruler { stroke: #ccc; display: none; }
 #main-chart .y.axis .domain { display: none; }
-#main-chart .y.axis .tick text { font-size: 9px; fill: #999; }
+#main-chart .y.axis .tick text { font-size: 9px; fill: #b3b3b3; }
 #main-chart .y.axis .tick line { display: none; }
 #main-chart .y.axis .tick line.ruler { display: block; }
 #main-chart .labels { position: relative; top: 0; left: 0; z-index: -1; }
 #main-chart .labels div.label {
   color: #444;
-  background: #fff;
+  background: #fcfcfc;
   font-size: 12px;
   padding: 0.5em 0.25em 0.5em 5.25em;
   margin: 0 0 0 -5em;
@@ -36,7 +36,7 @@
   margin: 0; }
 #main-chart .labels .label p.date {
   color: #999;
-  background: #fff;
+  background: #fcfcfc;
   font-size: 16px;
   font-weight: lighter;
   padding: 0.25em 0 0.25em 1em;
@@ -44,8 +44,7 @@
   display: block;
   position: absolute; top: 1px; }
 #main-chart .labels .label.locked p.date {
-  color: #444;
-  font-weight: normal; }
+  color: #444; }
 #main-chart .labels .label span.version {
   color: #fff;
   background-color: #999;
@@ -55,7 +54,7 @@
   border-radius: 0.5em; }
 #main-chart .labels .label span.value {
   color: #444;
-  background: #fff;
+  background: #fcfcfc;
   font-size: 100%;
   padding: 0.25em 0.5em;
   margin: 0;
