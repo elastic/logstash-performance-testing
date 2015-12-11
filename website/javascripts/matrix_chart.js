@@ -184,9 +184,11 @@ App.matrixChart = function(json, options) {
       svg.selectAll('.x.axis g.tick .overlay')
         .on('mouseover', function(d, i) {
           focus.call(this, d)
+          $(document).trigger('timeline.date.focus', d, i)
         })
         .on('mouseout', function(d, i)  {
           unfocus.call(this, d)
+          $(document).trigger('timeline.date.unfocus', d, i)
         })
     })
 

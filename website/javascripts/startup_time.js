@@ -71,9 +71,11 @@ App.startupTimeChart = function (options) {
 
     bar.on('mouseover', function(d,i) {
       chart.focus.call(this, d.time, i)
+      $(document).trigger('timeline.date.focus', d.time, i)
     });
     bar.on('mouseout', function(d,i) {
       chart.unfocus.call(this, d.time, i)
+      $(document).trigger('timeline.date.unfocus', d.time, i)
     });
 
     return this

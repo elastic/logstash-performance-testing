@@ -452,9 +452,11 @@ App.timeLineChart = function(json, options) {
       container.selectAll('.x.axis g.tick .overlay')
         .on('mouseover', function(d, i) {
           focus.call(this, d)
+          $(document).trigger('timeline.date.focus', d, i)
         })
         .on('mouseout', function(d, i) {
           unfocus.call(this, d)
+          $(document).trigger('timeline.date.unfocus', d, i)
         })
         .on('click', function(d)  {
           var tick = d3.select(this.parentNode)
