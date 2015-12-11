@@ -10,12 +10,9 @@
 </head>
 <body>
   <header>
-    <h1>Logstash Benchmarks</h1>
-    <p>
-      Displaying the number of events Logstash is able to generate when running for two minutes.
-      Showing aggregated values acrross all configurations —
-      click one of the smaller charts below to display a specific configuration.
-    </p>
+    <h1><a href="/">Logstash Benchmarks</a></h1>
+    <p><small>Displaying the number of events Logstash is able to generate when running for two minutes.</small><p>
+    <p id="loaded-configuration"></p>
     <div id="startup-time-chart"></div>
   </header>
 
@@ -36,8 +33,6 @@
   <script src="javascripts/time_line_chart.js"></script>
   <script src="javascripts/matrix_chart.js"></script>
 
-  <script>
-    App.run()
-  </script>
+  <script> $(document).ready(function() { App.run() });</script>
 </body>
 </html>

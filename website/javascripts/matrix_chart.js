@@ -190,6 +190,11 @@ App.matrixChart = function(json, options) {
           unfocus.call(this, d)
           $(document).trigger('timeline.date.unfocus', d, i)
         })
+
+      selection.selectAll('div.chart')
+        .on('click', function(d) {
+          $(document).trigger('timeline.configuration.load', d.label)
+        })
     })
 
     return this

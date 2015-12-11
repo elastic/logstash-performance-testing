@@ -3,15 +3,19 @@
   padding: 0 0 0 5px;
 }
 #matrix-chart .chart {
+  background: transparent;
   margin: 5px;
   padding: 0 0.5em 0 0.5em;
+  border-radius: 5px;
   display: inline-block;
 }
 #matrix-chart .chart:hover {
   background: #efefef;
-  display: inline-block;
-  border-radius: 5px;
   cursor: pointer;
+}
+#matrix-chart .chart.selected {
+  background: #ccc;
+  transition: 250ms;
 }
 #matrix-chart .chart:hover svg {
   cursor: pointer;
