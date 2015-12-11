@@ -22,7 +22,7 @@ App.timeLineChart = function(json, options) {
       xAxis  = d3.svg.axis().scale(xScale).orient("bottom").tickSize(5, 0).ticks(d3.time.day, 1),
       yAxis  = d3.svg.axis().scale(yScale).orient("left").tickSize(5, 0).ticks(10).tickFormat(d3.format("s")),
 
-      color = d3.scale.category10(),
+      color = d3.scale.ordinal().range(['#7ec700', '#146655', '#1f9981', '#29ccab', '#33ffd6']),
 
       line   = d3.svg.line().interpolate('basis').x(function(d) { return xScale(d.time)}).y(function(d) { return yScale(d.value)}),
 
@@ -138,7 +138,7 @@ App.timeLineChart = function(json, options) {
         .range([height - margin.top - margin.bottom, 0]);
 
       color
-        .domain(d3.keys(data[0].values));
+        .domain(d3.keys(data[0].values).sort().reverse());
 
       var tick_width = function() {
         tickArr = xScale.ticks()
@@ -174,7 +174,7 @@ App.timeLineChart = function(json, options) {
       container.append('g').attr('class', 'legend')
 
       // [4] Line charts
-      var versions = color.domain().map(function(name) {
+      var versions = color.domain().sort().map(function(name) {
         return {
           name: name,
           values: data.map(function(d) {
@@ -396,19 +396,19 @@ App.timeLineChart = function(json, options) {
             .classed('metrics', true)
             .html(function(d) {
               var result = []
-              for (prop in d.values) {
+              d3.keys(d.values).sort().reverse().forEach( function(version) {
                 result.push(
-                  '<span class="metric '+ parameterize('metric-'+prop) +'">'
+                  '<span class="metric '+ parameterize('metric-'+version) +'">'
                       + '<span class="version" '
-                      + 'style="background-color: ' + color(prop) + '">'
-                      + prop
+                      + 'style="background-color: ' + color(version) + '">'
+                      + version
                       + '</span>'
                       + '<span class="value">'
-                      + d3.format(',')(d.values[prop])
+                      + d3.format(',')(d.values[version])
                       + '</span>'
                   + '</span>'
                 )
-              }
+              })
               return result.join('\n')
             });
 
