@@ -84,6 +84,7 @@ App.matrixChart = function(json, options) {
       var svg = selection
         .append('div')
           .attr('id', function(d) { return parameterize('chart-' + d.label) })
+          .attr('data-name', function(d) { return d.label })
           .attr('class', 'chart')
         .append('svg')
           .attr('width', width + margin.left + margin.right)
@@ -193,7 +194,7 @@ App.matrixChart = function(json, options) {
 
       selection.selectAll('div.chart')
         .on('click', function(d) {
-          $(document).trigger('timeline.configuration.load', d.label)
+          $(document).trigger('timeline.configuration.load', d3.select(this).attr('data-name'))
         })
     })
 
