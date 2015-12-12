@@ -49,7 +49,7 @@ App.timeLineChart = function(json, options) {
 
       aggregated_data.forEach( function(d, i) {
         for ( configuration in json ) {
-          var data = json[configuration].find( function(e) { return e.time == d.time } );
+          var data = json[configuration].filter( function(e) { return e.time == d.time } )[0];
           // console.log(d.time, configuration, data.values);
           d.__values.push(data.values)
         }
