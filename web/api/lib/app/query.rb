@@ -52,7 +52,8 @@ module Microsite
         timestamps: {
           date_histogram: {
             field: "@timestamp",
-            interval: "day"
+            interval: "day",
+            format: "yyyy-MM-dd"
           }
         }
       }}
