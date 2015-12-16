@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'elasticsearch'
+gem 'jbuilder'
+gem 'sidekiq'
+gem 'puma'
