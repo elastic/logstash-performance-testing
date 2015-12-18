@@ -1,11 +1,13 @@
-require 'initialize'
 require 'sidekiq'
 require 'json'
 require 'app/fetcher'
 require 'app/decorator'
-require 'workers/test_worker'
+
+Dir[ File.expand_path('workers/*.rb', __FILE__) ].each   { |file| require file }
 
 class Application < Sinatra::Application
+
+  set :protection, except: :path_traversal
 
   #get the events stored for a given period of time
   get "/data/events.json" do
