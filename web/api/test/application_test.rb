@@ -22,6 +22,14 @@ module Microsite
         assert response.ok?, response.status.to_s
       end
 
+      should "set CORS headers for Ajax requests" do
+        get '/', {}, { "HTTP_X_REQUESTED_WITH" => "XMLHttpRequest" }
+
+        assert last_request.xhr?
+        assert response.ok?, response.status.to_s
+        assert_equal '*', response.headers['Access-Control-Allow-Origin']
+      end
+
       should "get events.json" do
         Microsite::Fetcher.expects(:fetch).with('events')
 

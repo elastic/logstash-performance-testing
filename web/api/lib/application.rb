@@ -11,6 +11,14 @@ class Application < Sinatra::Application
 
   set :protection, except: :path_traversal
 
+  before do
+    headers(
+      'Access-Control-Allow-Origin'  => '*',
+      'Access-Control-Allow-Methods' => [:post, :get, :options],
+      'Access-Control-Allow-Headers' => ["*", "Content-Type", "Accept", "AUTHORIZATION", "Cache-Control"].join(', ')
+    )
+  end
+
   get "/" do
     host = "#{request.scheme}://#{request.host_with_port}"
     respond_with events_url: "#{host}/data/events.json",
