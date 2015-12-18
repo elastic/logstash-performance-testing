@@ -12,6 +12,14 @@ body {
 body .on  { display: block !important; }
 body .off { display: none !important; }
 
+body.loading {
+  background: #fcfcfc url('../images/loading.png') 50% 50% no-repeat;
+}
+
+body.loading * {
+  opacity: 0.5;
+}
+
 a {
   color: #222;
 }

@@ -42,8 +42,9 @@ App.__load_main_chart = function(configuration) {
   d3.json(App.host + 'events.json', function(error, json) {
     App.main_chart = App.timeLineChart(json, { container: d3.select("#main-chart") });
     App.main_chart.draw(configuration)
+
+    $(document).trigger('application.loaded')
   });
-  return this
 }
 
 App.__load_matrix_chart = function(configuration) {
@@ -57,6 +58,10 @@ App.__load_matrix_chart = function(configuration) {
 }
 
 App.Dispatcher = function(params) {
+  $(document).on('application.loaded', function(event) {
+    $('body').removeClass('loading')
+  })
+
   $(document).on('timeline.date.focus', function(event, date, index) {
     App.startup_time_chart.focus(date, index)
     App.main_chart.focus(date, index)
