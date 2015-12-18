@@ -1,7 +1,6 @@
 require 'initialize'
 require 'sidekiq'
 require 'json'
-require 'app/config'
 require 'app/fetcher'
 require 'app/decorator'
 require 'workers/test_worker'

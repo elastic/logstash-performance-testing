@@ -14,6 +14,16 @@ for the [Logstash](https://www.elastic.co/products/logstash) project.
 Export the `ELASTICSEARCH_URL` variable to point to the Elasticsearch cluster containing
 the saved measurements.
 
+You can configure the `Microsite::Runner` class with environment variables as well:
+
+* LSPERF_RUNNER_RELEASES
+* LSPERF_RUNNER_BRANCHES
+* LSPERF_RUNNER_WORKSPACE
+* LSPERF_RUNNER_REPO
+* LSPERF_RUNNER_RUBY
+* LSPERF_RUNNER_GEMSET
+* LSPERF_RUNNER_SETUP
+
 -----
 
 (c) 2014 Elastic.co

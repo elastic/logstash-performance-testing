@@ -1,22 +1,19 @@
-require File.join(File.dirname(__FILE__), "../app/config" )
-
 module Microsite
   class Runner
 
-    attr_reader :config, :releases, :branches, :workspace, :repo_name
+    attr_reader :releases, :branches, :workspace, :repo_name
 
     def initialize
-      @config    = Microsite::Config.load
-      @releases  = config["runner"]["releases"]
-      @branches  = config["runner"]["branches"]
-      @workspace = config["runner"]["workspace"]
-      @repo_name = config["runner"]["repo"]
-      @ruby      = config["runner"]["rvm"]["ruby"]
-      @gemset    = config["runner"]["rvm"]["gemset"]
+      @releases  = ENV.fetch('LSPERF_RUNNER_RELEASES', '1.4.2,1.5.0,1.5.1,1.5.2').to_s.split(',')
+      @branches  = ENV.fetch('LSPERF_RUNNER_BRANCHES', 'master,1.5').to_s.split(',')
+      @workspace = ENV.fetch('LSPERF_RUNNER_WORKSPACE', 'Users/purbon/work/logstash-perf-testing/workspace')
+      @repo_name = ENV.fetch('LSPERF_RUNNER_REPO', 'git@github.com:elastic/logstash.git')
+      @ruby      = ENV.fetch('LSPERF_RUNNER_RUBY', 'jruby-1.17.20')
+      @gemset    = ENV.fetch('LSPERF_RUNNER_GEMSET', 'lsperf-webapp')
     end
 
     def perform
-      setup_script = config["runner"]["setup"]
+      setup_script = ENV.fetch('LSPERF_RUNNER_SETUP', '/Users/purbon/work/logstash-perf-testing/scripts/setup.sh')
       cmd = "#{setup_script} #{workspace}"
       system(cmd)
     end
