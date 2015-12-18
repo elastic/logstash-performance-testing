@@ -39,7 +39,7 @@ module Microsite
               [{"time"=>"2015-10-08", "values"=>{"master"=>6417180.0, "1.5"=>2863740.0, "2.0"=>0, "2.1"=>0}}]
           })
 
-        get '/data/events.json'
+        get '/events.json'
         assert response.ok?, response.status.to_s
         assert_match %r{"apache in/grok codec/json out"}, response.body
       end
@@ -53,7 +53,7 @@ module Microsite
             "datasets" => [ { "label" => "1.5", "data" => [ 3, 2, 1 ] } ]
           })
 
-        get '/data/startup_time.json'
+        get '/startup_time.json'
         assert response.ok?, response.status.to_s
         assert_match %r{"labels"}, response.body
         assert_match %r{"datasets"}, response.body

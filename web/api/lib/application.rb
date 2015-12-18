@@ -21,12 +21,12 @@ class Application < Sinatra::Application
 
   get "/" do
     host = "#{request.scheme}://#{request.host_with_port}"
-    respond_with events_url: "#{host}/data/events.json",
-                 startup_time_url: "#{host}/data/startup_time.json"
+    respond_with events_url: "#{host}/events.json",
+                 startup_time_url: "#{host}/startup_time.json"
   end
 
   #get the events stored for a given period of time
-  get "/data/events.json" do
+  get "/events.json" do
     data     = Microsite::Fetcher.fetch("events")
     versions = Microsite::Fetcher.find_versions
     events   = Microsite::Decorator.as_event_list(data, versions)
@@ -34,7 +34,7 @@ class Application < Sinatra::Application
   end
 
   # gets you the startup time for a given period of time
-  get "/data/startup_time.json" do
+  get "/startup_time.json" do
     data   = Microsite::Fetcher.fetch("start_time")
     events = Microsite::Decorator.as_chart(data)
     respond_with(events)
