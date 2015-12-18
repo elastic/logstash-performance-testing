@@ -1,6 +1,13 @@
 var App = App || {}
 
 App.run = function() {
+
+  if (document.location.host == 'localhost:8000') {
+    App.host = './data/'
+  } else {
+    App.host = '/api/'
+  }
+
   var configuration = decodeURIComponent( document.location.hash.substr(document.location.hash.indexOf('#')+1) );
 
   App.__load_startup_time();
@@ -23,7 +30,7 @@ App.parameterize = function(s) {
 };
 
 App.__load_startup_time = function() {
-  d3.json('data/startup_time.json', function(error, json) {
+  d3.json(App.host + 'startup_time.json', function(error, json) {
     if (error) return console.warn(error.responseText);
 
     App.startup_time_chart = App.startupTimeChart();
@@ -32,7 +39,7 @@ App.__load_startup_time = function() {
 }
 
 App.__load_main_chart = function(configuration) {
-  d3.json('data/events.json', function(error, json) {
+  d3.json(App.host + 'events.json', function(error, json) {
     App.main_chart = App.timeLineChart(json, { container: d3.select("#main-chart") });
     App.main_chart.draw(configuration)
   });
@@ -40,7 +47,7 @@ App.__load_main_chart = function(configuration) {
 }
 
 App.__load_matrix_chart = function(configuration) {
-  d3.json('data/events.json', function(error, json) {
+  d3.json(App.host + 'events.json', function(error, json) {
     App.matrix_chart = App.matrixChart(json);
     App.matrix_chart.draw(configuration)
     if (configuration.length > 0) {
