@@ -11,4 +11,5 @@ group :test do
   gem 'mocha', require: false
   gem 'shoulda-context', require: false
   gem 'rack-test'
+  gem 'minitest-reporters'
 end
