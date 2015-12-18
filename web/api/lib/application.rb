@@ -1,5 +1,7 @@
+require 'sinatra'
 require 'sidekiq'
 require 'json'
+
 require 'app/fetcher'
 require 'app/decorator'
 
@@ -47,3 +49,5 @@ class Application < Sinatra::Application
     data.to_json
   end
 end
+
+Application.run! if __FILE__ == $0
