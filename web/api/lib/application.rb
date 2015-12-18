@@ -5,7 +5,7 @@ require 'app/fetcher'
 require 'app/decorator'
 require 'workers/test_worker'
 
-class App < Sinatra::Application
+class Application < Sinatra::Application
 
   #get the events stored for a given period of time
   get "/data/events.json" do

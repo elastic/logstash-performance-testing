@@ -15,6 +15,6 @@ rescue Bundler::BundlerError => e
 end
 
 require 'sinatra'
-require 'app'
+require 'application'
 
-run App
+run Application
