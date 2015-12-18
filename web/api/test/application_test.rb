@@ -20,6 +20,12 @@ module Microsite
       should "get the list of APIs" do
         get '/'
         assert response.ok?, response.status.to_s
+        assert_match %r{http://example.org/events.json}, response.body
+      end
+
+      should "set the prefix for requests coming from Nginx" do
+        get '/', {}, { 'HTTP_X_PROXY_CLIENT' => 'nginx' }
+        assert_match %r{http://example.org/api/events.json}, response.body
       end
 
       should "set CORS headers for Ajax requests" do

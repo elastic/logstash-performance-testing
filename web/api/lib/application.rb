@@ -20,9 +20,10 @@ class Application < Sinatra::Application
   end
 
   get "/" do
+    prefix = request.env['HTTP_X_PROXY_CLIENT'] == 'nginx' ? '/api' : ''
     host = "#{request.scheme}://#{request.host_with_port}"
-    respond_with events_url: "#{host}/events.json",
-                 startup_time_url: "#{host}/startup_time.json"
+    respond_with events_url: "#{host}#{prefix}/events.json",
+                 startup_time_url: "#{host}#{prefix}/startup_time.json"
   end
 
   #get the events stored for a given period of time
