@@ -1,4 +1,3 @@
-hosts: 'XXX.YYY.ZZZ'
 runner:
   setup: '/Users/purbon/work/logstash-perf-testing/scripts/setup.sh'
   repo: 'git@github.com:elastic/logstash.git'
