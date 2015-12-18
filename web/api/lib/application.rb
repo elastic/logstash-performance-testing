@@ -11,6 +11,12 @@ class Application < Sinatra::Application
 
   set :protection, except: :path_traversal
 
+  get "/" do
+    host = "#{request.scheme}://#{request.host_with_port}"
+    respond_with events_url: "#{host}/data/events.json",
+                 startup_time_url: "#{host}/data/startup_time.json"
+  end
+
   #get the events stored for a given period of time
   get "/data/events.json" do
     data     = Microsite::Fetcher.fetch("events")

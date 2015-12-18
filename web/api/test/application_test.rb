@@ -17,6 +17,11 @@ module Microsite
         Microsite::Fetcher.stubs(:find_versions)
       end
 
+      should "get the list of APIs" do
+        get '/'
+        assert response.ok?, response.status.to_s
+      end
+
       should "get events.json" do
         Microsite::Fetcher.expects(:fetch).with('events')
 
