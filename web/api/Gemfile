@@ -1,7 +1,14 @@
 source 'https://rubygems.org'
 
+gem 'rake'
 gem 'sinatra'
 gem 'elasticsearch'
 gem 'jbuilder'
 gem 'sidekiq'
 gem 'puma'
+
+group :test do
+  gem 'mocha', require: false
+  gem 'shoulda-context', require: false
+  gem 'rack-test'
+end
