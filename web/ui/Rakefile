@@ -1,0 +1,25 @@
+#!/usr/bin/env rake
+
+task :default do
+  system 'rake --tasks'
+end
+
+desc "Run server for development"
+task :server do
+  require 'logger'
+  require 'thin'
+
+  port = ENV['PORT'] || 8000
+
+  logger = Logger.new(STDERR)
+  logger.formatter = proc { |s, d, p, m| "\e[2m#{m}\e[0m\n" }
+
+  Thin::Logging.logger = logger
+  Thin::Server.start port, lambda { |env|
+    if env['PATH_INFO'] == '/'
+      [200, {'Content-Type' => 'text/html'}, File.new('index.html')]
+    else
+      Rack::Directory.new('.').(env)
+    end
+  }
+end

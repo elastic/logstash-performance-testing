@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logstash Benchmarks</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/application.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/startup_time.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/time_line_chart.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/matrix_chart.css">
+</head>
+<body>
+  <header>
+    <h1><a href="/">Logstash Benchmarks</a></h1>
+    <p><small>Displaying the number of events Logstash is able to generate when running for two minutes.</small><p>
+    <p id="loaded-configuration"></p>
+    <div id="startup-time-chart"></div>
+  </header>
+
+  <div id="main-chart"></div>
+  <div id="matrix-chart"></div>
+
+  <footer>
+    <p>
+      &copy; Elastic.co 2015 |
+      Source at <a href="http://github.com/elastic/logstash-performance-testing">Github</a>
+    </p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="javascripts/application.js"></script>
+  <script src="javascripts/startup_time.js"></script>
+  <script src="javascripts/time_line_chart.js"></script>
+  <script src="javascripts/matrix_chart.js"></script>
+
+  <script> $(document).ready(function() { App.run() });</script>
+</body>
+</html>
