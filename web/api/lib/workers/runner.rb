@@ -4,12 +4,12 @@ module Microsite
     attr_reader :releases, :branches, :workspace, :repo_name
 
     def initialize
-      @releases  = ENV.fetch('LSPERF_RUNNER_RELEASES', '1.4.2,1.5.0,1.5.1,1.5.2').to_s.split(',')
-      @branches  = ENV.fetch('LSPERF_RUNNER_BRANCHES', 'master,1.5').to_s.split(',')
-      @workspace = ENV.fetch('LSPERF_RUNNER_WORKSPACE', 'Users/purbon/work/logstash-perf-testing/workspace')
-      @repo_name = ENV.fetch('LSPERF_RUNNER_REPO', 'git@github.com:elastic/logstash.git')
-      @ruby      = ENV.fetch('LSPERF_RUNNER_RUBY', 'jruby-1.17.20')
-      @gemset    = ENV.fetch('LSPERF_RUNNER_GEMSET', 'lsperf-webapp')
+      @releases  = ENV.fetch('LSPERF_RUNNER_RELEASES').to_s.split(',')
+      @branches  = ENV.fetch('LSPERF_RUNNER_BRANCHES').to_s.split(',')
+      @workspace = ENV.fetch('LSPERF_RUNNER_WORKSPACE')
+      @repo_name = ENV.fetch('LSPERF_RUNNER_REPO')
+      @ruby      = ENV.fetch('LSPERF_RUNNER_RUBY')
+      @gemset    = ENV.fetch('LSPERF_RUNNER_GEMSET')
     end
 
     def perform
