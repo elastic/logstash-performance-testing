@@ -23,3 +23,8 @@ task :server do
     end
   }
 end
+
+desc "Run Cucumber features"
+task :test do
+  sh "cd test && cucumber"
+end
