@@ -1,0 +1,13 @@
+#!/usr/bin/env rake
+
+task :default do
+  system 'rake --tasks'
+end
+
+desc "Run tests for UI and API"
+task :test do
+  puts '='*80, "Running tests for the API", '='*80
+  sh "cd api && rake test"
+  puts '='*80, "Running tests for the UI", '='*80
+  sh "cd ui && rake test"
+end
