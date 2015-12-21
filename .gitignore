@@ -3,3 +3,4 @@
 config.txt
 workspace/
 tmp/
+coverage/
