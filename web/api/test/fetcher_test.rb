@@ -33,25 +33,25 @@ module Microsite
                 }
               }
             },
-            "size":0,
-            "aggs":{
+
+            "aggregations":{
               "tests":{
                 "terms":{
                   "field":"name.raw"
                 },
-                "aggs":{
+                "aggregations":{
                   "timestamps":{
                     "date_histogram":{
                       "field":"@timestamp",
                       "interval":"day",
                       "format":"yyyy-MM-dd"
                     },
-                    "aggs":{
+                    "aggregations":{
                       "versions":{
                         "terms":{
                           "field":"label.raw"
                         },
-                        "aggs":{
+                        "aggregations":{
                           "stats":{
                             "stats":{
                               "field":"events"
@@ -63,14 +63,16 @@ module Microsite
                   }
                 }
               }
-            }
+            },
+
+            "size":0
           }
           JSON
 
           fetcher = Microsite::Fetcher.new("events")
 
           fetcher.__send__(:client).expects(:search).with do |arguments|
-            assert_equal MultiJson.load(json), MultiJson.load(MultiJson.dump(arguments[:body]))
+            assert_equal MultiJson.load(json), MultiJson.load(MultiJson.dump(arguments[:body].to_hash))
           end
 
           fetcher.query
@@ -90,21 +92,21 @@ module Microsite
                 }
               }
             },
-            "size":0,
-            "aggs":{
+
+            "aggregations":{
               "timestamps":{
                 "date_histogram":{
                   "field":"@timestamp",
                   "interval":"day",
                   "format":"yyyy-MM-dd"
                 },
-                "aggs":{
+                "aggregations":{
                   "test_cases":{
                     "terms":{
                       "field":"label.raw",
                       "size":10
                     },
-                    "aggs":{
+                    "aggregations":{
                       "stats":{
                         "stats":{
                           "field":"start time"
@@ -114,14 +116,16 @@ module Microsite
                   }
                 }
               }
-            }
+            },
+
+            "size":0
           }
           JSON
 
           fetcher = Microsite::Fetcher.new("start_time")
 
           fetcher.__send__(:client).expects(:search).with do |arguments|
-            assert_equal MultiJson.load(json), MultiJson.load(MultiJson.dump(arguments[:body]))
+            assert_equal MultiJson.load(json), MultiJson.load(MultiJson.dump(arguments[:body].to_hash))
           end
 
           fetcher.query
@@ -130,22 +134,22 @@ module Microsite
         should "return query for tests" do
           json = <<-JSON
           {
-            "size":0,
-            "aggs":{
+            "aggregations":{
               "series":{
                 "terms":{
                   "field":"name.raw",
                   "size":10
                 }
               }
-            }
+            },
+            "size":0
           }
           JSON
 
           fetcher = Microsite::Fetcher.new("tests")
 
           fetcher.__send__(:client).expects(:search).with do |arguments|
-            assert_equal MultiJson.load(json), MultiJson.load(arguments[:body])
+            assert_equal MultiJson.load(json), MultiJson.load(MultiJson.dump(arguments[:body].to_hash))
           end
 
           fetcher.query
@@ -154,22 +158,22 @@ module Microsite
         should "return query for bundles" do
           json = <<-JSON
           {
-            "size":0,
-            "aggs":{
+            "aggregations":{
               "series":{
                 "terms":{
                   "field":"label.raw",
                   "size":10
                 }
               }
-            }
+            },
+            "size":0
           }
           JSON
 
           fetcher = Microsite::Fetcher.new("bundles")
 
           fetcher.__send__(:client).expects(:search).with do |arguments|
-            assert_equal MultiJson.load(json), MultiJson.load(arguments[:body])
+            assert_equal MultiJson.load(json), MultiJson.load(MultiJson.dump(arguments[:body].to_hash))
           end
 
           fetcher.query
