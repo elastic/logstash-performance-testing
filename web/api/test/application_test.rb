@@ -1,5 +1,8 @@
 require 'test_helper'
 
+require 'rack/test'
+require 'sinatra'
+
 require File.expand_path('../../lib/application', __FILE__)
 
 module Microsite
