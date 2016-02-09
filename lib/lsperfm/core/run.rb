@@ -27,7 +27,7 @@ module LogStash::PerformanceMeter
       puts("launching #{command.join(" ")} #{required_events_count} #{required_run_time}") if @debug
       stats = LogStash::PerformanceMeter::Stats.new
       real_events_count = 0
-      Open3.popen3(*@command) do |i, o, e|
+      Open3.popen3({:BUNDLE_BIN_PATH => "", :BUNDLE_GEMFILE => "", :RUBYOPT => ""}, *@command) do |i, o, e|
         puts("sending initial event") if @debug
         start_time = Benchmark.realtime do
           i.puts(INITIAL_MESSAGE)
