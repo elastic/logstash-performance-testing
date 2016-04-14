@@ -49,6 +49,7 @@ Before you can run your test is necessary to bootstrap your logstash installatio
 If you are in 1.5.x:
 - Run `rake bootstrap` to setup the system.
 - Run `lsperfm-deps` to install the test dependencies
+
 For 1.4:
 - Run `bin/logstash deps` to setup everything.
 
