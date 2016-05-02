@@ -20,10 +20,13 @@ else
 
   # why do bootstrap here? can't we assume you must have a working logstash distribution?
   # `#{rake} bootstrap`
-
+  installer = File.join(base_dir, "bin", "plugin")
+  if !File.exist?(installer)
+    installer = File.join(base_dir, "bin", "logstash-plugin")
+  end
   [inputs, outputs, filters].each do |plugins|
     plugins.map{|s| "logstash-#{s}"}.each do |plugin|
-      command = "#{File.join(base_dir, "bin", "plugin")} install #{plugin}"
+      command = "#{installer} install #{plugin}"
       puts "#{command}\n#{%x[#{command}]}"
     end
   end

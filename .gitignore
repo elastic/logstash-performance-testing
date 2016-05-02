@@ -1,3 +1,4 @@
+webapp/pids/
 *.lock
 *.gem
 config.txt
