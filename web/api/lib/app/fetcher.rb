@@ -79,10 +79,13 @@ module Microsite
       end
     end
 
-    def query_start_time
+    def query_start_time(versions="master")
       search do
         query do
           filtered do
+            query do
+              match label: versions
+            end
             filter do
               range :@timestamp do
                 gte 'now-90d'

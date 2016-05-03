@@ -37,7 +37,9 @@ class Application < Sinatra::Application
 
   # gets you the startup time for a given period of time
   get "/startup_time.json" do
-    data   = Microsite::Fetcher.fetch("start_time")
+    fetcher  = Microsite::Fetcher.new("start_time")
+    versions = Microsite::Fetcher.find_versions
+    data     = fetcher.query(versions.join(' '))
     events = Microsite::Decorator.as_chart(data)
     respond_with(events)
   end
