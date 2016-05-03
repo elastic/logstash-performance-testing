@@ -22,8 +22,8 @@ module Microsite
       fetcher.find_versions
     end
 
-    def query
-      definition = @query_method.call
+    def query(params=nil)
+      definition = (params.nil? ? @query_method.call : @query_method.call(params))
       client_search definition
     end
 
@@ -36,10 +36,13 @@ module Microsite
 
     private
 
-    def query_events
+    def query_events(versions="master")
       search do
         query do
           filtered do
+            query do
+              match label: versions
+            end
             filter do
               range :@timestamp do
                 gte 'now-90d'
@@ -47,7 +50,6 @@ module Microsite
             end
           end
         end
-
         aggregation :tests do
           terms do
             field 'name.raw'
@@ -73,7 +75,6 @@ module Microsite
             end
           end
         end
-
         size 0
       end
     end
@@ -130,10 +131,7 @@ module Microsite
     def query_bundles
       search do
         aggregation :series do
-          terms do
-            field 'label.raw'
-            size  10
-          end
+          terms field: "label.raw", order: { _term: "desc" }, size: 5
         end
         size 0
       end

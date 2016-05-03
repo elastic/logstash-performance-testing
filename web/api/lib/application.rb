@@ -28,8 +28,9 @@ class Application < Sinatra::Application
 
   #get the events stored for a given period of time
   get "/events.json" do
-    data     = Microsite::Fetcher.fetch("events")
+    fetcher  = Microsite::Fetcher.new("events")
     versions = Microsite::Fetcher.find_versions
+    data     = fetcher.query(versions.join(' '))
     events   = Microsite::Decorator.as_event_list(data, versions)
     respond_with(events)
   end
