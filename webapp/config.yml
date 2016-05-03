@@ -1,0 +1,16 @@
+hosts: '9c6c5de1b6dabef919e771c659ca6813.us-east-1.aws.found.io'
+runner:
+  setup: '/Users/purbon/work/logstash-perf-testing/scripts/setup.sh'
+  repo: 'git@github.com:elastic/logstash.git'
+  workspace: '/Users/purbon/work/logstash-perf-testing/workspace'
+  releases:
+    - 1.4.2
+    - 1.5.0
+    - 1.5.1
+    - 1.5.2
+  branches:
+    - master
+    - 1.5
+  rvm:
+    ruby: "jruby-1.17.20"
+    gemset: "lsperf-webapp"

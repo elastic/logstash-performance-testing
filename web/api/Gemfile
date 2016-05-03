@@ -1,0 +1,18 @@
+source 'https://rubygems.org'
+
+gem 'rake'
+gem 'sinatra'
+gem 'elasticsearch'
+gem 'elasticsearch-dsl'
+gem 'multi_json'
+gem 'jbuilder'
+gem 'sidekiq'
+gem 'puma'
+
+group :test do
+  gem 'mocha', require: false
+  gem 'shoulda-context', require: false
+  gem 'rack-test'
+  gem 'minitest-reporters'
+  gem 'simplecov', require: false
+end

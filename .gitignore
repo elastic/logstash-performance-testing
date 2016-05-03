@@ -4,3 +4,5 @@ webapp/pids/
 config.txt
 workspace/
 utils/
+tmp/
+coverage/
