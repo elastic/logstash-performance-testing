@@ -103,7 +103,7 @@ App.matrixChart = function(json, options) {
               values:   values,
               min:      data.min,
               max:      data.max,
-              mean:     Math.round(d3.mean(values)),
+              mean:     Math.round(d3.mean(values) || 0),
               median:   data.median
             }
           });
