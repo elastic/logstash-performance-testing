@@ -7,5 +7,5 @@ branches:
   - "2.3"
   - "2.2"
 prs: 
-  - "https://github.com/elastic/logstash/pull/5560"
-  - "https://github.com/elastic/logstash/pull/4999"
+  - "5560"
+  - "4999"
