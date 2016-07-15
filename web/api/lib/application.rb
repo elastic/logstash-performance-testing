@@ -60,6 +60,12 @@ class Application < Sinatra::Application
     Microsite::TestWorker.perform_async('pull_hook', body)
   end
 
+  # hook that runs the configuration update process
+  post "/hook/pull_config" do
+    body = JSON.parse(request.body.read)
+    Microsite::ConfManager.perform_async('config_pull_hook', body)
+  end
+
   private
 
   def respond_with(data={})
