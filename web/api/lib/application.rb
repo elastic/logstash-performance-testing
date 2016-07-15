@@ -5,7 +5,8 @@ require 'json'
 require 'app/fetcher'
 require 'app/decorator'
 
-Dir[ File.expand_path('workers/*.rb', __FILE__) ].each   { |file| require file }
+require "workers/config_worker"
+require "workers/test_worker"
 
 class Application < Sinatra::Application
 
