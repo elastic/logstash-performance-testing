@@ -1,5 +1,6 @@
 require "yaml"
 require "json"
+require "elasticsearch"
 
 module Microsite
   class ConfManager
@@ -7,7 +8,7 @@ module Microsite
     attr_reader :config_file, :git_path
 
     def initialize
-      @config_file = ENV.fetch("LSPERF_CONFIG", File.join(File.dirname(__FILE__), "..", "..", "config.yml"))
+      @config_file = ENV.fetch("LSPERF_CONFIG", ::File.join(::File.dirname(__FILE__), "..", "..", "config.yml"))
       @git_path    = ENV.fetch("LSPERF_GITPATH")
     end
 
@@ -23,12 +24,12 @@ module Microsite
     end
 
     def update_config
-      payload = YAML.load_file(config_file)
+      payload = ::YAML.load_file(config_file)
       client.index  index: 'benchmarks-config', type: 'config', id: 1, body: payload
     end
 
     def client
-      @client ||= Elasticsearch::Client.new log: @debug
+      @client ||= ::Elasticsearch::Client.new log: @debug
     end
 
   end
