@@ -12,7 +12,12 @@ for the [Logstash](https://www.elastic.co/products/logstash) project.
 ## Configuration
 
 Export the `ELASTICSEARCH_URL` variable to point to the Elasticsearch cluster containing
-the saved measurements.
+the saved measurements. If you use shield is good enought to pass the
+user and password as URL parameters, see:
+
+ELASTICSEARCH_URL="http://my:pass@localhost:9200"
+
+as example.
 
 You can configure the `Microsite::Runner` class with environment variables as well:
 
@@ -24,6 +29,11 @@ You can configure the `Microsite::Runner` class with environment variables as we
 * LSPERF_RUNNER_GEMSET
 * LSPERF_RUNNER_SETUP
 
+Also you can configure the config manager with
+
+* LSPERF_CONFIG : Location of the config file to be managed.
+* LSPERF_GITPATH : Local git clone path.
+
 -----
 
-(c) 2014 Elastic.co
+(c) 2016 Elastic.co
