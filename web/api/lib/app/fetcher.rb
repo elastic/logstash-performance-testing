@@ -133,6 +133,9 @@ module Microsite
 
     def query_bundles
       search do
+        query do
+          match "tags" => 'branch'
+        end
         aggregation :series do
           terms field: "label.raw", order: { _term: "desc" }, size: 5
         end
