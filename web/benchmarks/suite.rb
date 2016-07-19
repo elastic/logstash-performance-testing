@@ -1,6 +1,6 @@
 module LogStash::PerformanceMeter
 
-  base_dir = File.dirname(__FILE__)
+  base_dir = "/home/purbon/logstash-performance-testing/benchmarks"
 
   DEFAULT_SUITE = [ { :name => "simple line in/out", :config => "#{base_dir}/config/simple.conf", :input => "#{base_dir}/input/simple_10.txt", :time => 120 },
                     { :name => "simple line in/json out", :config => "#{base_dir}/config/simple_json_out.conf", :input => "#{base_dir}/input/simple_10.txt", :time => 120 },
