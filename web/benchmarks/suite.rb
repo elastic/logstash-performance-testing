@@ -1,5 +1,7 @@
 module LogStash::PerformanceMeter
 
+  ## Base path for the benchmarks, will be different for every
+  ## system this suite is deployed.
   base_dir = "/home/purbon/logstash-performance-testing/benchmarks"
 
   DEFAULT_SUITE = [ { :name => "simple line in/out", :config => "#{base_dir}/config/simple.conf", :input => "#{base_dir}/input/simple_10.txt", :time => 120 },
