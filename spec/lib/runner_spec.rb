@@ -10,7 +10,7 @@ describe LogStash::PerformanceMeter::Runner do
 
   subject (:runner) { LogStash::PerformanceMeter::Runner.new(config) }
 
-  let(:command) { [File.join(Dir.pwd, LogStash::PerformanceMeter::Runner::LOGSTASH_BIN), "-f", "spec/fixtures/simple.conf"]}
+  let(:command) { [File.join(Dir.pwd, LogStash::PerformanceMeter::Runner::LOGSTASH_BIN), "-f", "spec/fixtures/simple.conf", "-w", "1"]}
 
   it "invokes the logstash command" do
     Open3.should_receive(:popen3).with(*command).and_return(true)
