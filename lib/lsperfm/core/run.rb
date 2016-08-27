@@ -68,7 +68,7 @@ module LogStash::PerformanceMeter
 
     def feed_input_events(io, events_count, lines, last_message)
       loop_count = (events_count / lines.size).ceil # how many time we send the input file over
-      (1..loop_count).each{lines.each {|line| io.puts(line)}}
+      loop_count.times{lines.each {|line| io.puts(line)}}
 
       io.puts(last_message)
       io.flush
@@ -85,7 +85,7 @@ module LogStash::PerformanceMeter
       count = 0
 
       while true
-        (1..loop_count).each{lines.each {|line| io.puts(line)}}
+        loop_count.times{lines.each {|line| io.puts(line)}}
         count += lines_per_iteration
         break if (Time.now - start_time) >= seconds
       end
